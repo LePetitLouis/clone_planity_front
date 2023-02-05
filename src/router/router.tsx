@@ -3,10 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 import Home from "../pages/Home";
-import Hairdresser from "../pages/Hairdresser";
-import Barber from "../pages/Barber";
-import Manicure from "../pages/Manicure";
-import BeautyInstitute from "../pages/BeautyInstitute";
+import Category from "../pages/Category";
 
 const router = createBrowserRouter([
     {
@@ -19,19 +16,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "coiffeur",
-                element: <Hairdresser />,
+                element: <Category />,
             },
             {
                 path: "barbier",
-                element: <Barber />,
+                element: <Category />,
             },
             {
                 path: "manucure",
-                element: <Manicure />,
+                element: <Category />,
             },
             {
                 path: "institut-beaute",
-                element: <BeautyInstitute />,
+                element: <Category />,
             },
         ],
     }

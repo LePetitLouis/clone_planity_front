@@ -10,10 +10,6 @@ const Header = () => {
     const location = useLocation();
     const { pathname } = location;
 
-    useEffect(() => {
-        console.log(location.pathname);
-    }, [location.pathname]);
-
     return (
         <HeaderContainer>
             <HeaderContent>
