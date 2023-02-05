@@ -8,7 +8,7 @@ interface HeaderCategoryProps {
 export const HeaderCategory = ({ category }: HeaderCategoryProps) => {
     return (
         <HeaderCategoryContainer>
-            <HeaderCategoryTitle>Réserver en ligne un RDV avec un {category}</HeaderCategoryTitle>
+            <HeaderCategoryTitle>Réserver en ligne un RDV avec un{category === "manucure" && 'e'} {category}</HeaderCategoryTitle>
             <SearchBar />
         </HeaderCategoryContainer>
     );

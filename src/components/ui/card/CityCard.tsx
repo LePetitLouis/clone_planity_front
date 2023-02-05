@@ -1,15 +1,16 @@
 import { CityCardContainer, CityCardTitle, CityCardImage, CityCardDescription, CityCardInfo } from './CityCardStyles';
 
 interface CityCardProps {
+    city: string;
     image: string;
     title: string;
     description: string;
-    onClick: () => void;
+    onClick: (value: string) => void;
 }
 
-const CityCard = ({ image, title, description, onClick }: CityCardProps) => {
+const CityCard = ({ city, image, title, description, onClick }: CityCardProps) => {
     return (
-        <CityCardContainer onClick={() => onClick}>
+        <CityCardContainer onClick={() => onClick(city)}>
             <CityCardImage src={image} />
             <CityCardInfo>
                 <CityCardTitle>{title}</CityCardTitle>

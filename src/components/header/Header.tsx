@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
 
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as LogoDark } from '../../assets/images/logo-dark.svg';
@@ -10,10 +10,19 @@ const Header = () => {
     const location = useLocation();
     const { pathname } = location;
 
+    const [backgroundColor, setBackgroundColor] = useState('transparent')
+
+    // change background color on scroll
+    window.addEventListener('scroll', () => {
+        let scroll = 1 + (window.scrollY || window.pageYOffset) / 150
+        scroll = scroll < 1 ? 1 : scroll
+        scroll > 1.5 ? setBackgroundColor('var(--white)') : setBackgroundColor('transparent')
+    })
+
     return (
-        <HeaderContainer>
+        <HeaderContainer style={{ backgroundColor: backgroundColor }}>
             <HeaderContent>
-                <Link to={`/`}>{ pathname === '/' ? <Logo style={{ width: '100px' }} /> : <LogoDark style={{ width: '100px' }} /> }</Link>
+                <Link to={`/`}>{ pathname === '/' ? <Logo style={{ width: '100px', height: '64px' }} /> : <LogoDark style={{ width: '100px', height: '64px' }} /> }</Link>
                 <Nav>
                     <List>
                         <ListItem><Link to={`/coiffeur`} style={{ color: pathname === '/' ? 'var(--white)' : 'var(--grey-900)' }}>Coiffeur</Link></ListItem>
