@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 
-export const ButtonCustom = styled.button`
+interface props {
+    color?: string;
+    backgroundColor?: string;
+    rounded?: boolean;
+    height?: string;
+}
+
+export const ButtonCustom = styled.button<props>`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: ${({ height }) => height ? height : '40px'};
     border: 0;
-    background-color: var(--grey-900);
-    color: var(--white);
+    background-color: ${({ backgroundColor }) => backgroundColor };
+    color: ${({ color }) => color };
     font: var(--medium) var(--body-4);
     transition: opacity ease-in .3s;
-    border-radius: var(--border-radius-medium);
+    border-radius: ${({ rounded }) => rounded ? 'var(--border-radius-medium)' : '0'};
     padding: 8px 12px;
+    cursor: pointer;
 `;

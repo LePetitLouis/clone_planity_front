@@ -13,7 +13,7 @@ const SearchBar = () => {
             <Input label="Que cherchez-vous ?" type="text" value={shop} placeholder="Nom du salon, prestation (coupe...)" onChange={(value) => setShop(value)} />
             <SearchBarSeparator />
             <Input label="Où" type="text" value={city} placeholder="Adresse, ville..." onChange={(value) => setCity(value)} />
-            <Button onClick={() => console.log('search')}>Rechercher</Button>
+            <Button onClick={() => console.log('search')} rounded color="var(--white)" backgroundColor="var(--grey-900)" height="48px">Rechercher</Button>
         </SearchBarContainer>
     )
 }
