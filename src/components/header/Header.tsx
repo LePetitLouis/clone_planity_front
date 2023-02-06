@@ -4,9 +4,10 @@ import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as LogoDark } from '../../assets/images/logo-dark.svg';
 import { HeaderContainer, HeaderContent, Nav, ButtonsContainer, List, ListItem } from "./HeaderStyles";
 import Button from "../ui/button/Button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const { pathname } = location;
 
@@ -33,7 +34,7 @@ const Header = () => {
                 </Nav>
                 <ButtonsContainer>
                     <Button onClick={() => console.log('add shop')} color="var(--grey-600)" backgroundColor="var(--grey-200)" rounded>Ajouter un établissement</Button>
-                    <Button onClick={() => console.log('login')} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Se connecter</Button>
+                    <Button onClick={() => navigate("login")} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Se connecter</Button>
                 </ButtonsContainer>
             </HeaderContent>
         </HeaderContainer>

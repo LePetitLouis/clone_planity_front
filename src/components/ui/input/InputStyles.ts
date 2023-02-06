@@ -23,8 +23,8 @@ export const InputCustom = styled.input`
     align-items: center;
     justify-content: center;
     width: 100%;
-    border: 0;
-    background-color: transparent;
+    border: none;
+    background-color: 'transparent';
     font: var(--medium) var(--body-4);
     transition: opacity ease-in .3s;
 

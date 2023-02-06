@@ -7,12 +7,13 @@ interface ButtonProps {
     rounded?: boolean;
     color?: string;
     backgroundColor?: string;
+    borderColor?: string;
     height?: string;
     onClick: () => void;
 }
 
-const Button = ({ children, rounded, color, backgroundColor, height, onClick }: ButtonProps) => {
-    return <ButtonCustom onClick={onClick} rounded={rounded} color={color} backgroundColor={backgroundColor} height={height}>{children}</ButtonCustom>;
+const Button = ({ children, rounded, color, backgroundColor, borderColor, height, onClick }: ButtonProps) => {
+    return <ButtonCustom onClick={onClick} rounded={rounded} color={color} backgroundColor={backgroundColor} borderColor={borderColor} height={height}>{children}</ButtonCustom>;
 };
 
 export default Button;

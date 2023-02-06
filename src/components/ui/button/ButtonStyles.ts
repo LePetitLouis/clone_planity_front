@@ -5,6 +5,7 @@ interface props {
     backgroundColor?: string;
     rounded?: boolean;
     height?: string;
+    borderColor?: string;
 }
 
 export const ButtonCustom = styled.button<props>`
@@ -12,7 +13,7 @@ export const ButtonCustom = styled.button<props>`
     align-items: center;
     justify-content: center;
     height: ${({ height }) => height ? height : '40px'};
-    border: 0;
+    border: 1px solid ${({ borderColor }) => borderColor ? borderColor : 'transparent' };
     background-color: ${({ backgroundColor }) => backgroundColor };
     color: ${({ color }) => color };
     font: var(--medium) var(--body-4);

@@ -4,13 +4,15 @@ import { InputContainer, LabelCustom, InputCustom } from "./InputStyles";
 
 interface InputProps {
     label: string;
+    colorLabel?: string;
+    colorInput?: string;
     type: string;
     value: string;
     placeholder?: string;
     onChange: (value: string) => void;
 }
 
-const Input = ({ label, type, value, placeholder, onChange }: InputProps) => {
+const Input = ({ label, colorLabel, colorInput, type, value, placeholder, onChange }: InputProps) => {
     const [isFocused, setIsFocused] = React.useState(false);
 
     const handleFocus = () => {
@@ -23,8 +25,8 @@ const Input = ({ label, type, value, placeholder, onChange }: InputProps) => {
 
     return (
         <InputContainer className={ isFocused ? 'focused' : '' }>
-            <LabelCustom>{label}
-                <InputCustom type={type} value={value} placeholder={placeholder} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} />
+            <LabelCustom style={{ color: colorLabel }}>{label}
+                <InputCustom type={type} value={value} placeholder={placeholder} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
             </LabelCustom>
         </InputContainer>
     );

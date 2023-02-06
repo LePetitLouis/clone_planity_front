@@ -4,6 +4,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Home from "../pages/Home";
 import Category from "../pages/Category";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +32,18 @@ const router = createBrowserRouter([
                 path: "institut-beaute",
                 element: <Category />,
             },
+            {
+                path: "login",
+                element: <Login />,
+            },
+            {
+                path: "register",
+                element: <Register />,
+            },
+            {
+                path: "*",
+                element: <Home />,
+            }
         ],
     }
 ]);
