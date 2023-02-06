@@ -110,4 +110,29 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.PhoneInput {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--grey-500);
+  border-radius: var(--border-radius-medium);
+  background-color: var(--white);
+  font: var(--medium) var(--body-4);
+  padding: 0 14px;
+
+  &--focus {
+    border: 1px solid var(--grey-900);
+  }
+
+  .PhoneInputInput {
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin-left: 10px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
 `;

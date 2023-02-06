@@ -38,7 +38,7 @@ const InputText = ({ label, colorLabel, colorInput, border, type, value, rounded
             <LabelTextCustom style={{ color: colorLabel }}>{label}
                 <InputTextCustom type={type} value={value} placeholder={placeholder} border={borderColor} rounded={rounded} height={height} backgroundInputColor={backgroundInputColor} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
             </LabelTextCustom>
-            { error?.length && <InputTextError>{error}</InputTextError>}
+            { error?.length ? <InputTextError>{error}</InputTextError> : null}
         </InputTextContainer>
     );
 };
