@@ -12,7 +12,7 @@ const Category = () => {
     const location = useLocation()
     const name = location.pathname.slice(1) === "institut-beaute" ? "institut de beauté" : location.pathname.slice(1)
 
-    const cities = ["Paris", "Lyon", "Marseille", "Bordeaux"]
+    const cities = ["Paris", "Lyon", "Marseille", "Bordeaux", "Toulouse", "Montpellier"]
 
     useEffect(() => {
         dispatch(resetSearch())

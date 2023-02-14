@@ -1,4 +1,4 @@
-import Authentification from "../components/authentification/Authentification"
+import Authentification from "../../components/authentification/Authentification"
 
 const ForgotPassword = () => {
     return (

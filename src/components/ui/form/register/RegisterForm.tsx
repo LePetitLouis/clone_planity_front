@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { RegisterFormContainer, RegisterFormTitle, RegisterFormContent, RegisterFormSeparator } from "./RegisterFormStyles";
 import InputText from "../../input/inputText/InputText";
 import InputPhone from "../../input/inputPhone/InputPhone";
-import { isValidPhoneNumber, formatPhoneNumber } from "react-phone-number-input";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Button from "../../button/Button";
 
 export const RegisterForm = () => {
@@ -28,7 +28,6 @@ export const RegisterForm = () => {
 
     if (password === "") setError(prevState => ({ ...prevState, password: "Merci de saisir un mot de passe" }));
 
-    // console.log(formatPhoneNumber(phone))
     if (phone === "") setError(prevState => ({ ...prevState, phone: "Merci de saisir un numéro de téléphone" }));
     else if (phone !== "" && !!isValidPhoneNumber(phone)) setError(prevState => ({ ...prevState, phone: "Merci de saisir un numéro de téléphone valide" }));
 

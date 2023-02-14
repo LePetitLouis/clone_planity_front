@@ -8,4 +8,5 @@ export const ListCityContainer = styled.div`
     max-width: calc(1176px + 2*var(--gutter));
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 40px;
 `;

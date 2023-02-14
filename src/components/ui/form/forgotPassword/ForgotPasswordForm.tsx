@@ -10,12 +10,26 @@ export const ForgotPasswordForm = () => {
 
     const [email, setEmail] = useState("");
 
+    const [error, setError] = useState({
+        email: "",
+    });
+
+    const handleForgotPassword = () => {
+        const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (email === "") setError(prevState => ({ ...prevState, email: "Merci de saisir une adresse email" }));
+        else if (email !== "" && !regexEmail.test(email)) setError(prevState => ({ ...prevState, email: "Merci de saisir une adresse email valide" }));
+    
+        if (email !== "" && regexEmail.test(email)) {
+          // TODO: Forgot password
+        }
+    };
+
     return (
         <ForgotPasswordFormContainer>
             <ForgotPasswordFormTitle>Mot de passe oublié ?</ForgotPasswordFormTitle>
-            <ForgotPasswordFormContent>
-                <InputText label="Email *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="email" value={email} placeholder="Email" onChange={(value) => setEmail(value)} />
-                <Button color="var(--white)" backgroundColor="var(--grey-900)" height="48px" rounded onClick={() => console.log('forgot password')}>Réinitialiser mon mot de passe</Button>
+            <ForgotPasswordFormContent onSubmit={e => e.preventDefault()}>
+                <InputText label="Email *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="email" value={email} placeholder="Email" error={error.email}  onChange={(value) => setEmail(value)} />
+                <Button color="var(--white)" backgroundColor="var(--grey-900)" height="48px" rounded onClick={handleForgotPassword} >Réinitialiser mon mot de passe</Button>
                 <ForgotPasswordFormLink href="/login">Retour à la connexion</ForgotPasswordFormLink>
                 <ForgotPasswordFormSeparator>ou</ForgotPasswordFormSeparator>
                 <ForgotPasswordFormTitle>Nouveau sur Planity ?</ForgotPasswordFormTitle>
