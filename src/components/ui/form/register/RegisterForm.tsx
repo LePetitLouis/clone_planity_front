@@ -21,6 +21,12 @@ export const RegisterForm = () => {
   });
 
   const handleRegister = () => {
+    setError({
+      phone: "",
+      email: "",
+      password: "",
+    });
+    
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (phone === "") setError(prevState => ({ ...prevState, phone: "Merci de saisir un numéro de téléphone" }));
     if (email === "") setError(prevState => ({ ...prevState, email: "Merci de saisir une adresse email" }));

@@ -15,6 +15,10 @@ export const ForgotPasswordForm = () => {
     });
 
     const handleForgotPassword = () => {
+        setError({
+            email: "",
+        });
+
         const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (email === "") setError(prevState => ({ ...prevState, email: "Merci de saisir une adresse email" }));
         else if (email !== "" && !regexEmail.test(email)) setError(prevState => ({ ...prevState, email: "Merci de saisir une adresse email valide" }));
