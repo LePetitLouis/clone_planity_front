@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/hook";
+
 import CityCard from "../ui/card/CityCard";
 import { ListCityContainer } from "./ListCityStyles";
 
-import { useAppDispatch } from "../../store/hook";
 import { setPlace } from "../../store/searchSlice";
 
 interface ListCityProps {
@@ -11,14 +13,15 @@ interface ListCityProps {
 
 const ListCity = ({ cities, category }: ListCityProps) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const capitalizeFirstLetter = (string: string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     const handleSelectedCity = (city: string) => {
-        console.log(city);
         dispatch(setPlace(city))
+        navigate('/result', { replace: true })
     }
 
     return (

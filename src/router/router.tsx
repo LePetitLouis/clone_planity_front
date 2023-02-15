@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Home from "../pages/Home";
 import Category from "../pages/Category";
+import Results from "../pages/Results";
 import Login from "../pages/authentification/Login";
 import Register from "../pages/authentification/Register";
 import ForgotPassword from "../pages/authentification/ForgotPassword";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: "institut-beaute",
                 element: <Category />,
+            },
+            {
+                path: "result",
+                element: <Results />,
             },
             {
                 path: "login",
