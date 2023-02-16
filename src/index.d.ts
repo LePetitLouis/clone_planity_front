@@ -17,6 +17,7 @@ export interface IShop {
 export interface IUser {
   id: number;
   name: string;
+  phone: string;
   email: string;
   role: string;
   token: string;

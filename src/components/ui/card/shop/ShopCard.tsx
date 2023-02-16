@@ -1,18 +1,22 @@
 import { ShopCardContainer, ShopCardAddress, ShopCardTitle, ShopCardImage, ShopCardContent } from "./ShopCardStyles";
 
-import Button from "../button/Button";
+import Button from "../../button/Button";
 import { CiLocationOn } from "react-icons/ci";
 
-import { IShop } from "../../../index.d";
+import { IShop } from "../../../../index.d";
+import { useNavigate } from "react-router-dom";
 
 export interface ShopCardProps {
   shop: IShop
 }
 
 const ShopCard = ({ shop }: ShopCardProps) => {
+  const navigate = useNavigate();
 
   const handleShowShop = () => {
     console.log('show shop', shop.id);
+
+    navigate(`/details-shop/${shop.id}`);
   }
 
   return (

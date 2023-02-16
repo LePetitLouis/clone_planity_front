@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hook";
+import { useAppDispatch } from "../../../../store/hook";
 
-import CityCard from "../ui/card/CityCard";
+import CityCard from "../../card/city/CityCard";
 import { ListCityContainer } from "./ListCityStyles";
 
-import { setPlace } from "../../store/searchSlice";
+import { setPlace } from "../../../../store/searchSlice";
 
 interface ListCityProps {
     cities: string[];

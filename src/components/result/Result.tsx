@@ -1,6 +1,6 @@
 import { ResultContainer, ResultContent, ResultMap } from "./ResultStyles";
 
-import ListShop from "../../components/listShop/ListShop";
+import ListShop from "../ui/list/shop/ListShop";
 import Map, { Marker } from 'react-map-gl';
 
 import { IShop } from "../../index.d";

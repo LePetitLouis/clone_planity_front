@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
 import { HeaderCategory } from "../components/headerCategory/HeaderCategory"
-import ListCity from "../components/listCity/ListCity"
+import ListCity from "../components/ui/list/city/ListCity"
 
 import { useAppDispatch } from "../store/hook"
 import { setCategory, resetSearch } from "../store/searchSlice"

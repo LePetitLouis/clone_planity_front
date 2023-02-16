@@ -1,9 +1,9 @@
 import { ListShopContainer, ListShopHeader, ListShopTitle, ListShopSubTitle } from "./ListShopStyles";
-import ShopCard from "../ui/card/ShopCard";
+import ShopCard from "../../card/shop/ShopCard";
 
-import { IShop } from "../../index.d";
-import { useAppSelector } from "../../store/hook";
-import { selectSearch } from "../../store/searchSlice";
+import { IShop } from "../../../../index.d";
+import { useAppSelector } from "../../../../store/hook";
+import { selectSearch } from "../../../../store/searchSlice";
 
 interface ListShopProps {
   shops: IShop[];
