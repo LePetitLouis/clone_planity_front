@@ -12,6 +12,8 @@ const SearchBar = () => {
     const navigate = useNavigate()
     const search = useAppSelector(selectSearch)
 
+    const suggestions = ["Coiffeurs", "Barbiers", "Manucure", "Instituts de beauté", "Tatoueurs"]
+
     const handleResult = () => {
         console.log('search', search)
         if (search.category === '' && search.place === '') {
@@ -22,7 +24,7 @@ const SearchBar = () => {
 
     return (
         <SearchBarContainer>
-            <Input label="Que cherchez-vous ?" type="text" value={search.category} placeholder="Nom du salon, prestation (coupe...)" onChange={(value) => dispatch(setCategory(value))} />
+            <Input label="Que cherchez-vous ?" type="text" value={search.category} placeholder="Nom du salon, prestation (coupe...)" suggestions={suggestions} onChange={(value) => dispatch(setCategory(value))} />
             <SearchBarSeparator />
             <Input label="Où" type="text" value={search.place} placeholder="Adresse, ville..." onChange={(value) => dispatch(setPlace(value))} />
             <Button onClick={handleResult} rounded color="var(--white)" backgroundColor="var(--grey-900)" height="48px">Rechercher</Button>
