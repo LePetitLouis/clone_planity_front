@@ -40,7 +40,43 @@ Shop.args = {
         "lng": 2.267000,
         "lat": 48.856310,
         "categories": ["Coiffure", "Esthétique"],
-        "openingHours": ["Lundi - Vendredi: 9h - 19h"],
+        "openingHours": [
+            {
+                "day": 1,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            {
+                "day": 2,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            {
+                "day": 3,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            {
+                "day": 4,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            {
+                "day": 5,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            { 
+                "day": 6,
+                "opening": "09:00",
+                "closing": "18:00"
+            },
+            {
+                "day": 0,
+                "opening": "09:00",
+                "closing": "18:00"
+            }
+        ],
         "city": "Paris",
         "postalCode": "75000",
     },
