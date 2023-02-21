@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../../store/hook";
 import CityCard from "../../card/city/CityCard";
 import { ListCityContainer } from "./ListCityStyles";
 
-import { setPlace } from "../../../../store/searchSlice";
+import { setPlace } from "../../../../store/slice/searchSlice";
 
 interface ListCityProps {
     cities: string[];

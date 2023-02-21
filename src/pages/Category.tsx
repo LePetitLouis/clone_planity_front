@@ -5,7 +5,7 @@ import { HeaderCategory } from "../components/headerCategory/HeaderCategory"
 import ListCity from "../components/ui/list/city/ListCity"
 
 import { useAppDispatch } from "../store/hook"
-import { setCategory, resetSearch } from "../store/searchSlice"
+import { setCategory, resetSearch } from "../store/slice/searchSlice"
 
 const Category = () => {
     const dispatch = useAppDispatch()

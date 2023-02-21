@@ -5,18 +5,19 @@ import { IBenefit } from "../../../../index.d";
 
 interface BenefitCardProps {
     benefit: IBenefit;
+    onClick: (value: IBenefit) => void
 }
 
-const BenefitCard = ({ benefit }: BenefitCardProps) => {
+const BenefitCard = ({ benefit, onClick }: BenefitCardProps) => {
     return (
-        <BenefitCardContainer>
+        <BenefitCardContainer onClick={() => onClick(benefit)}>
             <BenefitCardContent>
                 <BenefitCardTitle>{benefit.title}</BenefitCardTitle>
                 {benefit.description && <BenefitCardDescription>{benefit.description}</BenefitCardDescription>}
             </BenefitCardContent>
             <BenefitCardTime>{benefit.time}</BenefitCardTime>
             {benefit.price && <BenefitCardPrice>{benefit.price}</BenefitCardPrice>}
-            <Button onClick={() => console.log('Choisir')} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Choisir</Button>
+            <Button onClick={() => ''} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Choisir</Button>
         </BenefitCardContainer>
     );
 };

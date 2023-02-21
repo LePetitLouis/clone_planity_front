@@ -1,11 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 
 
+// Open access page
 import Layout from "../components/layout/Layout";
 import Home from "../pages/Home";
 import Category from "../pages/Category";
 import Results from "../pages/Results";
 import DetailsShop from "../pages/DetailsShop";
+import Booking from "../pages/Booking";
+
+// Authentification pages
 import Login from "../pages/authentification/Login";
 import Register from "../pages/authentification/Register";
 import ForgotPassword from "../pages/authentification/ForgotPassword";
@@ -42,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: "details-shop/:id",
                 element: <DetailsShop />,
+            },
+            {
+                path: "booking",
+                element: <Booking />,
             },
             {
                 path: "login",

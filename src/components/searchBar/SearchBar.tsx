@@ -5,7 +5,7 @@ import Input from "../ui/input/Input"
 import Button from "../ui/button/Button"
 
 import { useAppSelector, useAppDispatch } from "../../store/hook"
-import { selectSearch, setCategory, setPlace } from "../../store/searchSlice"
+import { selectSearch, setCategory, setPlace } from "../../store/slice/searchSlice"
 
 const SearchBar = () => {
     const dispatch = useAppDispatch()

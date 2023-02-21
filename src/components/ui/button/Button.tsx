@@ -9,11 +9,13 @@ interface ButtonProps {
     backgroundColor?: string;
     borderColor?: string;
     height?: string;
+    width?: string;
+    margin?: string;
     onClick: () => void;
 }
 
-const Button = ({ children, rounded, color, backgroundColor, borderColor, height, onClick }: ButtonProps) => {
-    return <ButtonCustom onClick={onClick} rounded={rounded} color={color} backgroundColor={backgroundColor} borderColor={borderColor} height={height}>{children}</ButtonCustom>;
+const Button = ({ children, rounded, color, backgroundColor, borderColor, height, width, margin, onClick }: ButtonProps) => {
+    return <ButtonCustom onClick={onClick} rounded={rounded} color={color} backgroundColor={backgroundColor} borderColor={borderColor} height={height} width={width} margin={margin}>{children}</ButtonCustom>;
 };
 
 export default Button;

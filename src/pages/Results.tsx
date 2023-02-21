@@ -53,8 +53,8 @@ const Results = () => {
           },
           {
               "day": 0,
-              "opening": "09:00",
-              "closing": "18:00"
+              "opening": "",
+              "closing": ""
           }
         ],
         city: "Paris",

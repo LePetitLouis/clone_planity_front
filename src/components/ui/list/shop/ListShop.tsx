@@ -2,15 +2,25 @@ import { ListShopContainer, ListShopHeader, ListShopTitle, ListShopSubTitle } fr
 import ShopCard from "../../card/shop/ShopCard";
 
 import { IShop } from "../../../../index.d";
-import { useAppSelector } from "../../../../store/hook";
-import { selectSearch } from "../../../../store/searchSlice";
+import { useAppSelector, useAppDispatch } from "../../../../store/hook";
+import { selectSearch } from "../../../../store/slice/searchSlice";
+import { useNavigate } from "react-router-dom";
+import { setShop } from "../../../../store/slice/bookingSlice";
 
 interface ListShopProps {
   shops: IShop[];
 }
 
 const ListShop = ({ shops }: ListShopProps) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const search = useAppSelector(selectSearch)
+
+  const handleSelectedShop = (shop: IShop) => {
+    dispatch(setShop(shop))
+    navigate(`/details-shop/${shop.id}`);
+  }
 
   return (
     <>
@@ -23,6 +33,7 @@ const ListShop = ({ shops }: ListShopProps) => {
           <ShopCard
             key={shop.id}
             shop={shop}
+            onClick={(shop) => handleSelectedShop(shop)}
           />
         ))}
       </ListShopContainer>

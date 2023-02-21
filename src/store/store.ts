@@ -5,10 +5,14 @@ import {
     PreloadedState,
   } from '@reduxjs/toolkit';
 
-import { searchReducer } from "./searchSlice";
+import { searchReducer } from "./slice/searchSlice";
+import { bookingReducer } from "./slice/bookingSlice";
+import { authReducer } from "./slice/authSlice";
 
 const rootReducer = combineReducers({
-    search: searchReducer
+    search: searchReducer,
+    booking: bookingReducer,
+    auth: authReducer,
 })
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
