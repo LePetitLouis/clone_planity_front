@@ -1,21 +1,26 @@
+// components
 import { RecapContainer, RecapHeader, RecapTitle, RecapHeaderAddress, RecapStepOne, RecapStepOneTitle, RecapStepOneTime, RecapStepOnePrice, RecapStepTwo, RecapStepTwoDate, RecapStepTwoTime } from "./RecapStyles";
 import Step from "../ui/step/Step";
 import Button from "../ui/button/Button";
 import Timeslot from "../timeslot/Timeslot";
 import LoginForm from "../ui/form/login/LoginForm";
 
+// store
 import { useAppDispatch, useAppSelector } from "../../store/hook"
 import { selectBooking, setTime, setDate } from "../../store/slice/bookingSlice";
 import { useNavigate } from "react-router-dom";
-
-import { monthNames } from "../../utils";
 import { selectAuth } from "../../store/slice/authSlice";
+import { selectSearch } from "../../store/slice/searchSlice";
+
+// utils
+import { monthNames } from "../../utils";
 
 
 const Recap = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
+    const search = useAppSelector(selectSearch)
     const booking = useAppSelector(selectBooking)
     const auth = useAppSelector(selectAuth)
 
@@ -26,6 +31,11 @@ const Recap = () => {
 
         dispatch(setDate(new Date(`${year}-${monthNumber}-${date} ${time}`)))
         booking.benefit?.time && dispatch(setTime(booking.benefit?.time))
+    }
+
+    const handleGoToDetailsShop = () => {
+        navigate(`/details-shop/${booking.shop?.id}`)
+        dispatch(setDate(null))
     }
     
     return (
@@ -43,17 +53,17 @@ const Recap = () => {
                         <RecapStepOnePrice>{booking.benefit?.price}</RecapStepOnePrice>
                     </div>
                 </RecapStepOne>
-                <Button onClick={() => navigate(`/details-shop/${booking.shop?.id}`)} color="var(--primary-200)" backgroundColor="var(--white)">Supprimer</Button>
+                <Button onClick={handleGoToDetailsShop} color="var(--primary-200)" backgroundColor="var(--white)">Supprimer</Button>
             </Step>
 
             <Step number="2" title="Choix de la date & heure">
                 {!booking.date ? (
-                    <Timeslot dateStart={new Date("May 7, 2023")} openingHours={booking.shop?.openingHours} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />) 
+                    <Timeslot dateStart={search.date ? search.date : new Date(Date.now())} openingHours={booking.shop?.openingHours} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />) 
                     : (
                     <>
                         <RecapStepTwo>
                             <RecapStepTwoDate>
-                                {booking.date.toLocaleDateString('fr-FR', { weekday: 'long' })} {booking.date.getDay()} {booking.date.toLocaleDateString('fr-FR', { month: 'long' })} {booking.date.toLocaleDateString('fr-FR', { year: 'numeric' })}
+                                {booking.date.toLocaleDateString('fr-FR', { weekday: 'long' })} {booking.date.toLocaleDateString('fr-FR', { day: 'numeric' })} {booking.date.toLocaleDateString('fr-FR', { month: 'long' })} {booking.date.toLocaleDateString('fr-FR', { year: 'numeric' })}
                             </RecapStepTwoDate>
                             <RecapStepTwoTime>à {booking.date.getHours()}h {booking.date.getMinutes() === 0 ? '' : booking.date.getMinutes()}</RecapStepTwoTime>
                         </RecapStepTwo>
@@ -62,9 +72,9 @@ const Recap = () => {
                 )}
             </Step>
 
-            <Step number="3" title="Identification">
+            {booking.date && <Step number="3" title="Identification">
                 {!auth.isAuthenticated && <LoginForm /> } 
-            </Step>
+            </Step>}
         </RecapContainer>
     );
 };

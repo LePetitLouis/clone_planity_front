@@ -44,7 +44,7 @@ export const Timeslot = ({ dateStart, openingHours, onClick }: TimeSlotProps) =>
             date.setDate(date.getDate() + i);
             const day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
             const dateNumber = date.toLocaleDateString('fr-FR', { day: 'numeric' });
-            const month = date.toLocaleDateString('fr-FR', { month: 'short' });
+            const month = date.toLocaleDateString('fr-FR', { month: 'long' });
             const year = date.toLocaleDateString('fr-FR', { year: 'numeric' });
 
             const openningHoursOfDay = openingHours?.filter((openingHour: IOpeningHours) => openingHour.day === days.indexOf(day));

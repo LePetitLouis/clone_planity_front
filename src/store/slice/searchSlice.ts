@@ -4,13 +4,13 @@ import { RootState } from "../store";
 type SearchState = {
     category: string;
     place: string;
-    date?: string;
+    date?: Date;
 };
 
 const initialState: SearchState = {
     category: "",
     place: "",
-    date: "",
+    date: undefined,
 };
 
 export const searchSlice = createSlice({
@@ -29,7 +29,7 @@ export const searchSlice = createSlice({
         resetSearch: (state) => {
             state.category = "";
             state.place = "";
-            state.date = "";
+            state.date = undefined;
         }
     },
 });
