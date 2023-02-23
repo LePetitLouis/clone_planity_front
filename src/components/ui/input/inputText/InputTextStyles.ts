@@ -17,6 +17,7 @@ export const InputTextContainer = styled.div`
 export const LabelTextCustom = styled.label`
     font: var(--medium) var(--body-4);
     color: var(--grey-500);
+    position: relative;
 `;
 
 export const InputTextCustom = styled.input<props>`
