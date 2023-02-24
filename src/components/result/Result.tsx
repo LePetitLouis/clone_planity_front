@@ -5,6 +5,8 @@ import Map, { Marker } from 'react-map-gl';
 
 import { IShop } from "../../index.d";
 
+import { env } from "../../config/env";  
+
 interface ResultProps {
   shops: IShop[];
 }
@@ -23,7 +25,7 @@ const Result = ({ shops }: ResultProps) => {
             latitude: 48.866667,
             zoom: 6,
           }}
-          mapboxAccessToken="pk.eyJ1IjoicGV0aXRsb3VpcyIsImEiOiJjbDNlOTAyMmUwZmRvM2ZsNXJtcjV4OTBkIn0.X9rxSrW6cEvzHSpYBT6VHA"
+          mapboxAccessToken={env.REACT_APP_API_KEY_MAPBOX}
           style={{width: '100%', height: '100%'}}
           mapStyle="mapbox://styles/mapbox/streets-v9"
         >
