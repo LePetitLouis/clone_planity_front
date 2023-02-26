@@ -16,7 +16,7 @@ export const InputPhone = ({ label, value, placeholder, defaultCountry, error, o
     return (
         <>
         <LabelCustom>{label}</LabelCustom>
-        <PhoneInput value={value} placeholder={placeholder} defaultCountry={defaultCountry} error={error} onChange={(value) => onChange(value)} style={{ borderColor: error?.length && 'var(--danger-200)' }} />
+        <PhoneInput value={value} placeholder={placeholder} defaultCountry={defaultCountry} error={error} onChange={(value) => onChange(value)} style={{ borderColor: error?.length ? 'var(--danger-200)' : 'var(--grey-500)' }} />
         {error?.length ? <InputPhoneError>{error}</InputPhoneError> : null}
         </>
     );

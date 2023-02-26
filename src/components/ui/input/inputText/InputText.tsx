@@ -14,11 +14,12 @@ interface InputTextProps {
     height?: string;
     backgroundInputColor?: string;
     placeholder?: string;
+    autoComplete?: string;
     error?: string;
     onChange: (value: string) => void;
 }
 
-const InputText = ({ label, colorLabel, colorInput, border, type, value, rounded, height, backgroundInputColor, placeholder, error, onChange }: InputTextProps) => {
+const InputText = ({ label, colorLabel, colorInput, border, type, value, rounded, height, backgroundInputColor, placeholder, error, autoComplete, onChange }: InputTextProps) => {
     const [isFocused, setIsFocused] = useState(false);
     const [currentType, setCurrentType] = useState(type);
     const [borderColor, setBorderColor] = useState(border);
@@ -44,7 +45,7 @@ const InputText = ({ label, colorLabel, colorInput, border, type, value, rounded
     return (
         <InputTextContainer className={ isFocused ? 'focused' : '' }>
             <LabelTextCustom style={{ color: colorLabel }}>{label}
-                <InputTextCustom type={currentType} value={value} placeholder={placeholder} border={borderColor} rounded={rounded} height={height} backgroundInputColor={backgroundInputColor} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
+                <InputTextCustom type={currentType} value={value} placeholder={placeholder} autoComplete={autoComplete} border={borderColor} rounded={rounded} height={height} backgroundInputColor={backgroundInputColor} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
                 { type === 'password' ? <span onClick={toggleShowPassword} style={{position: 'absolute', top: '55%', right: '15px', cursor: 'pointer'}}>{showPassword ? <BsEyeSlash /> : <BsEye />}</span> : null }
             </LabelTextCustom>
             { error?.length ? <InputTextError>{error}</InputTextError> : null}

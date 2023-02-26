@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
+// Layout pages
+import Layout from "../layout/Layout";
+import LayoutDash from "../layout/dash/LayoutDash";
 
 // Open access page
-import Layout from "../components/layout/Layout";
 import Home from "../pages/Home";
 import Category from "../pages/Category";
 import Results from "../pages/Results";
@@ -13,6 +15,12 @@ import Booking from "../pages/Booking";
 import Login from "../pages/authentification/Login";
 import Register from "../pages/authentification/Register";
 import ForgotPassword from "../pages/authentification/ForgotPassword";
+import TraderRegister from "../pages/authentification/TraderRegister";
+
+// Dashboard pages
+import HomeDash from "../pages/traderDash/HomeDash";
+import CalendarDash from "../pages/traderDash/CalendarDash";
+import HomeUserDash from "../pages/userDash/HomeUserDash";
 
 const router = createBrowserRouter([
     {
@@ -64,8 +72,39 @@ const router = createBrowserRouter([
                 element: <ForgotPassword />,
             },
             {
+                path: "my-account",
+                element: <HomeUserDash />
+            },
+            {
                 path: "*",
                 element: <Home />,
+            }
+        ],
+    },
+    {
+        path: "/pro",
+        children: [
+        {
+            path: "*",
+            element: <TraderRegister />,
+        },
+        {
+            path: "register",
+            element: <TraderRegister />,
+        }
+        ],
+    },
+    {
+        path: "dashboard",
+        element: <LayoutDash />,
+        children: [
+            {
+                path: "*",
+                element: <HomeDash />,
+            },
+            {
+                path: "calendar",
+                element: <CalendarDash />,
             }
         ],
     }

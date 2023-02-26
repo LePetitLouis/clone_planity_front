@@ -73,7 +73,7 @@ const Recap = () => {
             </Step>
 
             {booking.date && <Step number="3" title="Identification">
-                {!auth.isAuthenticated && <LoginForm /> } 
+                {!auth.token && <LoginForm /> } 
             </Step>}
         </RecapContainer>
     );

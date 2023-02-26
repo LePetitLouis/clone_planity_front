@@ -4,14 +4,18 @@ import { RootState } from '../store';
 
 type AuthState = {
     token: string;
-    user: any;
-    isAuthenticated: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
 };
 
 const initialState: AuthState = {
     token: "",
-    user: {},
-    isAuthenticated: false,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
 };
 
 export const authSlice = createSlice({
@@ -20,13 +24,17 @@ export const authSlice = createSlice({
     reducers: {
         login: (state, action: PayloadAction<AuthState>) => {
             state.token = action.payload.token;
-            state.user = action.payload.user;
-            state.isAuthenticated = true;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+            state.email = action.payload.email;
+            state.phone = action.payload.phone;
         },
         logout: (state) => {
             state.token = "";
-            state.user = {};
-            state.isAuthenticated = false;
+            state.firstName = "";
+            state.lastName = "";
+            state.email = "";
+            state.phone = "";
         }
     },
 });
