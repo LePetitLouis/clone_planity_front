@@ -12,6 +12,7 @@ import { AddressAutofill } from "@mapbox/search-js-react"
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { IBenefit } from "../../../../index.d";
 import { env } from "../../../../config/env";  
+import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 
 interface IStepOneForm {
     firstName: string;
@@ -133,6 +134,24 @@ const TraderRegister = () => {
             if (stepThreeState.categories.length) setError(prevState => ({ ...prevState, categories: "Merci de saisir au moins une catégorie" }))
         }
     }
+
+    const items = [
+        {
+            name: "Coiffeur"
+        },
+        {
+            name: "Barbier"
+        },
+        {
+            name: "Manucure"
+        },
+        {
+            name: "Institut de beauté"
+        },
+        {
+            name: "Tatoueur"
+        },
+    ]
 
     return (
         <TraderRegisterContainer>
@@ -299,6 +318,7 @@ const TraderRegister = () => {
                             value={stepThreeState.description}
                             onChange={(value) => updateStepThreeState({ ...stepThreeState, description: value })}
                         />
+                        <InputCheckbox items={items}/>
                     </>
                 )}
             </TraderRegisterContent>
