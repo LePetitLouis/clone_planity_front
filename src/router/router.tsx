@@ -76,6 +76,10 @@ const router = createBrowserRouter([
                 element: <HomeUserDash />
             },
             {
+                path: "dashbord-trader",
+                element: <HomeDash />
+            },
+            {
                 path: "*",
                 element: <Home />,
             }
