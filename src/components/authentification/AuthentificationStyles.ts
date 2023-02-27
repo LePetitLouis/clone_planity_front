@@ -16,11 +16,11 @@ export const AuthentificationContent = styled.div`
     align-items: center;
     justify-content: center;
     gap: 24px;
-    flex: 1;
+    width: 50%;
     background-color: var(--grey-100);
 `;
 
 export const AuthentifactionImg = styled.img`
-    flex: 1;  
+    width: 50%;
     height: 100%;
 `;
