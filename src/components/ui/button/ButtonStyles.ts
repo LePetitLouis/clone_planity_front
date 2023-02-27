@@ -25,4 +25,11 @@ export const ButtonCustom = styled.button<props>`
     border-radius: ${({ rounded }) => rounded ? 'var(--border-radius-medium)' : '0'};
     padding: 8px 12px;
     cursor: pointer;
+
+    &:disabled {
+        background-color: var(--grey-200);
+        color: var(--grey-400);
+        cursor: not-allowed;
+        border-color: var(--grey-200);
+    }
 `;

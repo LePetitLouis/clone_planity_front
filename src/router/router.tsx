@@ -20,7 +20,7 @@ import TraderRegister from "../pages/authentification/TraderRegister";
 // Dashboard pages
 import HomeDash from "../pages/traderDash/HomeDash";
 import CalendarDash from "../pages/traderDash/CalendarDash";
-import HomeUserDash from "../pages/userDash/HomeUserDash";
+import HomeUserDash from "../pages/userDash/home/HomeUserDash";
 
 const router = createBrowserRouter([
     {
