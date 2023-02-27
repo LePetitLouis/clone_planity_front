@@ -11,11 +11,11 @@ type AuthState = {
 };
 
 const initialState: AuthState = {
-    token: "test",
-    firstName: "Louis",
-    lastName: "Poupat",
-    email: "louispoupat@sfr.fr",
-    phone: "+33644000564",
+    token: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
 };
 
 export const authSlice = createSlice({
