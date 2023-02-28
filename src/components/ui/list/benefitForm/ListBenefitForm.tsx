@@ -5,7 +5,6 @@ import { ListBenefitFormContainer, ListBenefitFormSubTitle, ListBenefitFormTitle
 
 interface ListBenefitFormProps{
   title: string;
-  description: string;
 }
 
 interface ITypeTraderPrestation{
@@ -29,7 +28,7 @@ const items=[
   }
 ];
 
-const ListBenefitForm = ({title, description}: ListBenefitFormProps) => {
+const ListBenefitForm = ({title}: ListBenefitFormProps) => {
 
   const initialTypeOfPrestation: typeOfPrestationProps = {
     types: []
@@ -39,9 +38,7 @@ const ListBenefitForm = ({title, description}: ListBenefitFormProps) => {
 
   return (
     <ListBenefitFormContainer>
-      <ListBenefitFormTitle>{title}
-        {description && <ListBenefitFormSubTitle>{description}</ListBenefitFormSubTitle>}
-      </ListBenefitFormTitle>
+      <ListBenefitFormTitle>{title}</ListBenefitFormTitle>
       <InputCheckbox items={items} typeCheckbox='prestation' onChange={(value) => setTypeOfPrestation({...typeOfPrestation, types: value })}/>
       <BenefitForm />
     </ListBenefitFormContainer>

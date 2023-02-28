@@ -9,7 +9,7 @@ interface DashBoardProps {
 const Dashboard = ({openingHours}: DashBoardProps) => {
   return (
     <DashBoardContainer>
-      <ListBenefitForm title="Renseignez vos préstations" description="Homme"/>
+      <ListBenefitForm title="Renseignez vos préstations" />
       <ListOpeningHoursForm openingHours={openingHours}/>
     </DashBoardContainer>
   );
