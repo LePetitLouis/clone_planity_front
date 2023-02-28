@@ -12,6 +12,7 @@ interface OpeningHoursCardInputProps{
 const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputProps) => {
 
   const [time, setTime] = useState("00:00")
+  const [checkboxValue, setCheckboxValue] = useState();
 
   const weekday = [
     "Dimanche",
@@ -25,12 +26,19 @@ const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputP
 
   const isToday = new Date().getDay() === day;
 
+  const itemsHours = [
+    {
+      name: weekday[day],
+      label: "Ouvert"
+    }
+  ]
+
 
   return (
     <OpeningHoursCardFormContainer>
       <OpeningHoursCardDay strong={isToday}>{weekday[day]}</OpeningHoursCardDay>
-      <InputTime value={time} onChange={(value) => setTime(value)} />
-      <OpeningHoursCardInfo>(ne pas renseignez les horaires si fermer)</OpeningHoursCardInfo>
+      {checkboxValue ? <InputTime value={time} onChange={(value) => setTime(value)} /> : '-'}
+      <InputCheckbox items={itemsHours} onChange={(value) => setCheckboxValue(value)} />
     </OpeningHoursCardFormContainer>
   );
 };

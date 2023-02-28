@@ -52,4 +52,5 @@ export interface ICollaborator {
 
 export interface ITypeTrader {
   types: string;
+  do: boolean
 }

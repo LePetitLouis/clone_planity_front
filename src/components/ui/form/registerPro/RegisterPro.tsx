@@ -153,11 +153,10 @@ const TraderRegister = () => {
         },
         {
             name: "Institut de beauté"
-        },
-        {
-            name: "Tatoueur"
-        },
+        }
     ]
+
+    console.log(stepThreeState.types)
 
     return (
         <TraderRegisterContainer>
@@ -324,7 +323,7 @@ const TraderRegister = () => {
                             value={stepThreeState.description}
                             onChange={(value) => updateStepThreeState({ ...stepThreeState, description: value })}
                         />
-                        <InputCheckbox items={items} onChange={(value) => updateStepThreeState({...stepThreeState, types: value })} />
+                        <InputCheckbox items={items} typeCheckbox="register_pro" onChange={(value) => updateStepThreeState({...stepThreeState, types: value })} />
                     </>
                 )}
             </TraderRegisterContent>
