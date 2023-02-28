@@ -56,3 +56,11 @@ export const LoginFormSeparator = styled.span`
         margin-left: 16px;
     }
 `;
+
+export const LoginFormError = styled.p`
+    width: 100%;
+    text-align: center;
+    font: var(--medium) var(--body-4);
+    color: var(--danger-200);
+    margin-top: 4px;
+`;

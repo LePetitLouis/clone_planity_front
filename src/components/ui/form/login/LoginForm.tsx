@@ -1,13 +1,18 @@
 import { useState } from "react";
 
-import { LoginFormContainer, LoginFormTitle, LoginFormContent, LoginFormSeparator, LoginFormLink } from "./LoginFormStyles";
+import { LoginFormContainer, LoginFormTitle, LoginFormContent, LoginFormSeparator, LoginFormLink, LoginFormError } from "./LoginFormStyles";
 import InputText from "../../input/inputText/InputText";
 import Button from "../../button/Button";
 
 import { useNavigate } from "react-router-dom";
 
+import { API } from "../../../../services/index";
+import { useAppDispatch } from "../../../../store/hook";
+import { login } from "../../../../store/slice/authSlice";
+
 const LoginForm = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +21,10 @@ const LoginForm = () => {
         password: "",
     });
 
-    const handleLogin = () => {
+    const [errorLogin, setErrorLogin] = useState("");
+
+    const handleLogin = async () => {
+        setErrorLogin("");
         setError({
             email: "",
             password: "",
@@ -29,13 +37,21 @@ const LoginForm = () => {
         if (password === "") setError(prevState => ({ ...prevState, password: "Merci de saisir un mot de passe" }));
 
         if (email !== "" && regexEmail.test(email) && password !== "") {
-            // TODO: Login
+            const data = await API.auth.login(email, password);
+            console.log(data);
+            if (data) {
+                dispatch(login(data));
+                navigate('/my-account', { replace: true });
+            } else {
+                setErrorLogin("L'adresse email ou le mot de passe est incorrect");
+            }
         }
     };
 
     return (
         <LoginFormContainer>
             <LoginFormTitle>Vous avez déjà utilisé Planity ?</LoginFormTitle>
+            {errorLogin && <LoginFormError>{errorLogin}</LoginFormError>}
             <LoginFormContent onSubmit={e => e.preventDefault()}>
                 <InputText label="Email *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="email" value={email} placeholder="Email" error={error.email} onChange={(value) => setEmail(value)} />
                 <InputText label="Mot de passe *" border="var(--grey-500)" backgroundInputColor="var(--white)" rounded colorLabel="var(--grey-900)" type="password" value={password} placeholder="Mot de passe" error={error.password} onChange={(value) => setPassword(value)} />

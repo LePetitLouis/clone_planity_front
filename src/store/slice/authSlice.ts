@@ -8,6 +8,7 @@ type AuthState = {
     lastName: string;
     email: string;
     phone: string;
+    role: string;
 };
 
 const initialState: AuthState = {
@@ -16,6 +17,7 @@ const initialState: AuthState = {
     lastName: "",
     email: "",
     phone: "",
+    role: ""
 };
 
 export const authSlice = createSlice({
@@ -28,6 +30,7 @@ export const authSlice = createSlice({
             state.lastName = action.payload.lastName;
             state.email = action.payload.email;
             state.phone = action.payload.phone;
+            state.role = action.payload.role;
         },
         logout: (state) => {
             state.token = "";
@@ -35,6 +38,7 @@ export const authSlice = createSlice({
             state.lastName = "";
             state.email = "";
             state.phone = "";
+            state.role = "";
         }
     },
 });

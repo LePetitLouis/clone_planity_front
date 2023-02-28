@@ -7,7 +7,7 @@ import InputPhone from "../../input/inputPhone/InputPhone";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import Button from "../../button/Button";
 
-import { Api } from "../../../../services/index";
+import { API } from "../../../../services/index";
 import { useAppDispatch } from "../../../../store/hook";
 import { login } from "../../../../store/slice/authSlice";
 
@@ -44,12 +44,12 @@ export const RegisterForm = () => {
     if (lastName === "") setError(prevState => ({ ...prevState, lastName: "Merci de saisir un nom" }));
 
     if (firstName !== "" && lastName !== "") {
-      const response = await Api.Auth.register(firstName, lastName, phone, email, password)
-      console.log(response);
-
-      if (response.status === 200) {
-        dispatch(login(response.data));
-        navigate("/my-account");
+      const data = await API.auth.register(firstName, lastName, phone, email, password, 'role')
+      if (data) {
+        dispatch(login(data));
+        navigate('/my-account', { replace: true });
+      } else {
+        alert('Erreur lors de l\'inscription');
       }
     }
   };

@@ -7,7 +7,7 @@ import InputPhone from "../../../components/ui/input/inputPhone/InputPhone";
 
 import { useNavigate } from "react-router-dom";
 
-import { Api } from "../../../services";
+import { API } from "../../../services";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { login, logout, selectAuth } from "../../../store/slice/authSlice";
 
@@ -30,17 +30,28 @@ const HomeUserDash = () => {
         lastName: auth.lastName,
         email: auth.email,
         phone: auth.phone,
+        role: auth.role,
     });
 
     const handleVerifyPassword = async () => {
-        const response = await Api.Auth.verifyPassword(password);
-        if (response.data) {
+        const data = await API.user.verifyPassword(password);
+        if (data) {
             setStepPassword('newPassword');
+        } else {
+            alert('Mot de passe incorrect');
         }
     }
 
     const handleUpdatePassword = async () => {
-        await Api.Auth.updatePassword(newPassword);
+        const data = await API.user.verifyPassword(newPassword);
+        if (data) {
+            setStepPassword('password');
+            setPassword('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+        } else {
+            alert('Erreur lors de la mise à jour du mot de passe');
+        }
     }
 
     const initInfos = () => {
@@ -50,11 +61,12 @@ const HomeUserDash = () => {
             lastName: auth.lastName,
             email: auth.email,
             phone: auth.phone,
+            role: auth.role,
         });
     }
 
     const handleUpdateUser = async () => {
-        const response = await Api.Auth.updateProfile(userInfos.firstName, userInfos.lastName, userInfos.email, userInfos.phone);
+        const response = await API.user.updateProfile(userInfos.firstName, userInfos.lastName, userInfos.email, userInfos.phone);
         if (response.data) {
             dispatch(login(response.data));
         }
@@ -73,13 +85,12 @@ const HomeUserDash = () => {
                 lastName: auth.lastName,
                 email: auth.email,
                 phone: auth.phone,
+                role: auth.role,
             });
         }
 
         initInfos();
     }, [auth]);
-
-    console.log(userInfos, auth)
 
     return (
         <HomeUserDashContainer>
