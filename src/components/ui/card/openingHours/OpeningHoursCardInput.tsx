@@ -10,10 +10,6 @@ interface OpeningHoursCardInputProps{
 
 const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputProps) => {
 
-  const [close, setClose] = useState(false);
-  const [dayLabel, setDayLabel] = useState({});
-  const [dayTime, setDayTime] = useState({});
-
   const weekday = [
     "Dimanche",
     "Lundi",
@@ -25,14 +21,6 @@ const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputP
   ]
 
   const isToday = new Date().getDay() === day;
-
-  const handleClose = (value: any, dayLabel: string) => {
-    setClose(value)
-    setDayLabel(dayLabel)
-  
-    console.log(close)
-    console.log(dayLabel)
-  }
 
 
   return (
