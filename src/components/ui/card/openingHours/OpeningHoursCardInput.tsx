@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
+import InputTime from "../../input/InputTime/InputTime";
 import { OpeningHoursCardDay, OpeningHoursCardFormContainer, OpeningHoursCardInfo } from "./OpeningHoursCardStyles";
 
 interface OpeningHoursCardInputProps{
@@ -9,6 +10,8 @@ interface OpeningHoursCardInputProps{
 }
 
 const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputProps) => {
+
+  const [time, setTime] = useState("00:00")
 
   const weekday = [
     "Dimanche",
@@ -26,7 +29,7 @@ const OpeningHoursCardInput = ({ day, opening, closing }: OpeningHoursCardInputP
   return (
     <OpeningHoursCardFormContainer>
       <OpeningHoursCardDay strong={isToday}>{weekday[day]}</OpeningHoursCardDay>
-      <input className="time" type="time" name="time" value="00:00" />
+      <InputTime value={time} onChange={(value) => setTime(value)} />
       <OpeningHoursCardInfo>(ne pas renseignez les horaires si fermer)</OpeningHoursCardInfo>
     </OpeningHoursCardFormContainer>
   );
