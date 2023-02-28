@@ -25,6 +25,8 @@ const InputCheckbox = ({items, onChange, typeCheckbox}: InputCheckBoxProps) => {
             onChange={(e) => onChange(
               typeCheckbox == "register_pro" ?
                 {types: element.name, do: e.target.checked}
+              : typeCheckbox == "prestation" ? 
+                {types: element.name, do: e.target.checked}
               :
                 e.target.checked
               )}
