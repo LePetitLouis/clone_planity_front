@@ -38,7 +38,6 @@ const LoginForm = () => {
 
         if (email !== "" && regexEmail.test(email) && password !== "") {
             const data = await API.auth.login(email, password);
-            console.log(data);
             if (data) {
                 dispatch(login(data));
                 navigate('/my-account', { replace: true });

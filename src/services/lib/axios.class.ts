@@ -18,7 +18,6 @@ class Axios {
     if (accessToken) this.instance.defaults.headers.common.Token = accessToken
     else delete this.instance.defaults.headers.common.Token
     this.accessToken = accessToken
-    console.log(this.instance.defaults.headers.common.Token)
   }
 
   async get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R>{

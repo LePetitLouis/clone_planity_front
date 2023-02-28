@@ -73,6 +73,7 @@ const HomeUserDash = () => {
     }
 
     const handleLogout = () => {
+        API.auth.logout();
         dispatch(logout())
         navigate('/');
     }

@@ -27,6 +27,10 @@ class Auth {
         return this.processToken(data);
     }
 
+    public async logout() {
+       return this.processToken({} as IDataUser);
+    }
+    
     public setRefreshToken(refreshToken: string) {
         this.refreshToken = refreshToken;
     }
