@@ -28,7 +28,7 @@ const BenefitForm = () => {
         </BenefitFormContent>
         <BenefitFormContent>
           <BenefitFormTime>
-            <InputTime label="Heure préstation *" value={time} onChange={(value) => setTime(value)}/>
+            <InputTime label="Heure préstation *" value={time} classNameForm='for_form' onChange={(value) => setTime(value)}/>
           </BenefitFormTime>
           <BenefitFormPrice>
             <InputText label="Prix préstation *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="number" value={price} placeholder="Price" onChange={(value) => setPrice(value)} />

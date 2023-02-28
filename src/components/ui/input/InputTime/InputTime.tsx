@@ -4,12 +4,13 @@ import { InputTimeContainer } from "./InputTimeStyles"
 interface InputTimeProps{
   value: any
   label?: string
+  classNameForm?: string
   onChange: (value: any) => void
 }
 
-const InputTime = ({value, label, onChange}: InputTimeProps) => {
+const InputTime = ({value, label, classNameForm, onChange}: InputTimeProps) => {
   return (
-    <InputTimeContainer>
+    <InputTimeContainer className={classNameForm}>
       <LabelTextCustom>{label}
         <input type="time" name="time" value={value} onChange={(event) => onChange(event.target.value)}></input>
       </LabelTextCustom> 

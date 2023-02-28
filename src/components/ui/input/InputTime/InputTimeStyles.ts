@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const InputTimeContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0;
-  height: 80px;
+  &.for_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    height: 80px;
+  }
   input{
     background: #fff;
     border: none;
