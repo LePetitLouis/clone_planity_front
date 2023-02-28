@@ -10,7 +10,7 @@ import Stepline from "../../stepline/Stepline";
 import { AddressAutofill } from "@mapbox/search-js-react"
 
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { IBenefit } from "../../../../index.d";
+import { IBenefit, ITypeTrader } from "../../../../index.d";
 import { env } from "../../../../config/env";  
 import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 
@@ -34,6 +34,7 @@ interface IStepThreeForm {
     benefits: IBenefit[];
     categories: string[];
     description: string;
+    types: ITypeTrader[];
 }
 
 const TraderRegister = () => {
@@ -61,6 +62,7 @@ const TraderRegister = () => {
         benefits: [],
         categories: [],
         description: "",
+        types: [],
     };
     const [stepThreeState, updateStepThreeState] = useReducer((state: IStepThreeForm, newState: IStepThreeForm) => ({ ...state, ...newState }), initialStepThreeForm);
 
@@ -77,6 +79,7 @@ const TraderRegister = () => {
         companyCountry: "",
         benefits: "",
         categories: "",
+        types: ""
     });
 
     const handleNextStep = () => {
@@ -93,6 +96,7 @@ const TraderRegister = () => {
             companyCountry: "",
             benefits: "",
             categories: "",
+            types: ""
         });
 
         if (currentStep === 1) {
@@ -125,14 +129,16 @@ const TraderRegister = () => {
             if (stepTwoState.companyCountry === "") setError(prevState => ({ ...prevState, companyCountry: "Merci de saisir le pays de votre entreprise" }));
         } else if (currentStep === 3) {
             // Check if all fields are filed
-            if (stepThreeState.benefits.length && stepThreeState.categories.length) {
+            if (stepThreeState.benefits.length && stepThreeState.categories.length && stepThreeState.types.length) {
                 // show modal success 
             }
 
             // Error handling
             if (stepThreeState.benefits.length) setError(prevState => ({ ...prevState, benefits: "Merci de saisir au moins une prestation" }))
             if (stepThreeState.categories.length) setError(prevState => ({ ...prevState, categories: "Merci de saisir au moins une catégorie" }))
+            if (stepThreeState.types.length) setError(prevState => ({ ...prevState, types: "Merci de saisir au moins un type de commerce" }))
         }
+        
     }
 
     const items = [
@@ -318,7 +324,7 @@ const TraderRegister = () => {
                             value={stepThreeState.description}
                             onChange={(value) => updateStepThreeState({ ...stepThreeState, description: value })}
                         />
-                        <InputCheckbox items={items}/>
+                        <InputCheckbox items={items} onChange={(value) => updateStepThreeState({...stepThreeState, types: value })} />
                     </>
                 )}
             </TraderRegisterContent>

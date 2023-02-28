@@ -49,3 +49,7 @@ export interface ICollaborator {
   id: number;
   name: string;
 }
+
+export interface ITypeTrader {
+  types: string;
+}
