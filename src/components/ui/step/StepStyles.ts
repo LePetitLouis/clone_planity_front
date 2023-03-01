@@ -29,4 +29,5 @@ export const StepContainer = styled.div`
     border: 1px solid var(--grey-200);
     display: flex;
     align-items: center;
+    position: relative;
 `;

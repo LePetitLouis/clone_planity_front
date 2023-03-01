@@ -6,6 +6,7 @@ import Timeslot from "../timeslot/Timeslot";
 import LoginForm from "../ui/form/login/LoginForm";
 import InputTextarea from "../ui/input/inputTextarea/InputTextarea";
 import { CgMathPlus } from "react-icons/cg";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
 // store
 import { useAppDispatch, useAppSelector } from "../../store/hook"
@@ -28,6 +29,7 @@ const Recap = () => {
     const auth = useAppSelector(selectAuth)
 
     const [showComments, setShowComments] = useState(false);
+    const [dateStart, setDateStart] = useState<Date>(search.date ? search.date : new Date(Date.now()));
 
     const handleSelectedDateTime = (year: string, month: string, date: string, time: string) => {
         const monthNumber = monthNames.indexOf(month.replace(/^[a-z]/, (m) => { return m.toUpperCase() })) + 1;
@@ -50,6 +52,14 @@ const Recap = () => {
     const handleConfirmationBooking = () => {
         console.log('confirmation')
     }
+
+    const nextWeek = () => {
+        setDateStart(new Date(dateStart.getTime() + 7 * 24 * 60 * 60 * 1000))
+    }
+
+    const previousWeek = () => {
+        setDateStart(new Date(dateStart.getTime() - 7 * 24 * 60 * 60 * 1000))
+    }
     
     return (
         <RecapContainer>
@@ -68,10 +78,14 @@ const Recap = () => {
                 </RecapStepOne>
                 <Button onClick={handleGoToDetailsShop} color="var(--primary-200)" backgroundColor="var(--white)">Supprimer</Button>
             </Step>
-
             <Step number="2" title="Choix de la date & heure">
                 {!booking.date ? (
-                    <Timeslot dateStart={search.date ? search.date : new Date(Date.now())} openingHours={booking.shop?.openingHours} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />) 
+                    <>
+                        <FiChevronLeft size={25} color={(dateStart.toLocaleDateString() === search.date?.toLocaleDateString() || dateStart.toLocaleDateString() === new Date().toLocaleDateString()) ? '#F7F7F7' : 'var(--grey-700)' } cursor={(dateStart.toLocaleDateString() === search.date?.toLocaleDateString() || dateStart.toLocaleDateString() === new Date().toLocaleDateString()) ? 'not-allowed' : 'pointer'} style={{ position: 'absolute', top: '30px', left: '20px'}} onClick={previousWeek} />
+                        <Timeslot dateStart={dateStart} openingHours={booking.shop?.openingHours} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />
+                        <FiChevronRight size={25} cursor="pointer" style={{ position: 'absolute', top: '30px', right: '20px' }} onClick={nextWeek} />
+                    </>
+                    ) 
                     : (
                     <>
                         <RecapStepTwo>
