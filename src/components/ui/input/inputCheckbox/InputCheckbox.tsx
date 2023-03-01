@@ -28,6 +28,9 @@ const InputCheckbox = ({items, onChange, typeCheckbox}: InputCheckBoxProps) => {
               : typeCheckbox == "prestation" ?
                 {types: element.name, do: e.target.checked}
               :
+              typeCheckbox == "open_hours" ?
+                {types: element.name, do: e.target.checked}
+              :
                 e.target.checked
             )}
           />

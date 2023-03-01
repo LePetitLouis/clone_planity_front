@@ -1,6 +1,6 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
-import { TraderRegisterContainer, TraderRegisterTitle, TraderRegisterContent } from "./RegisterProStyles";
+import { TraderRegisterContainer, TraderRegisterTitle, TraderRegisterContent, RegisterProContainerCheckbox } from "./RegisterProStyles";
 import InputText from "../../input/inputText/InputText";
 import InputPhone from "../../input/inputPhone/InputPhone";
 import InputTextarea from "../../input/inputTextarea/InputTextarea";
@@ -36,6 +36,33 @@ interface IStepThreeForm {
     description: string;
     types: ITypeTrader[];
 }
+
+interface ITypeTraderType{
+    type: string;
+    value: boolean;
+}
+  
+interface typeOfTraderProps{
+    types: ITypeTraderType[];
+}
+
+const items = [
+    {
+        name: "Coiffeurs"
+    },
+    {
+        name: "Barbiers"
+    },
+    {
+        name: "Manucure"
+    },
+    {
+        name: "Institut de beauté"
+    },
+    {
+        name: "Tatoueurs"
+    }
+]
 
 const TraderRegister = () => {
     const [currentStep, setCurrentStep] = useState(3);
@@ -81,6 +108,14 @@ const TraderRegister = () => {
         categories: "",
         types: ""
     });
+
+    const initialTypeOfTrader: typeOfTraderProps = {
+        types: []
+    };
+      
+    const [typeOfTrader, setTypeOfTrader] = useReducer((state: typeOfTraderProps, newState: typeOfTraderProps) => ({ ...state, ...newState }), initialTypeOfTrader);
+    
+    const [oldArray, setOldArray] = useState<any[] | [typeOfTraderProps]>([undefined])
 
     const handleNextStep = () => {
         setError({
@@ -141,22 +176,50 @@ const TraderRegister = () => {
         
     }
 
-    const items = [
-        {
-            name: "Coiffeur"
-        },
-        {
-            name: "Barbier"
-        },
-        {
-            name: "Manucure"
-        },
-        {
-            name: "Institut de beauté"
-        }
-    ]
+    const getTypeTrader = (value:any) => {
+        setOldArray((oldArray) => [...oldArray, value]);
+    }
 
-    console.log(stepThreeState.types)
+    const filterArray = (item:any) => {
+        if(item == undefined){
+            oldArray.splice(0, 1);
+        }
+    }
+
+    const filterArrayFalse = (item:any) => {
+        if(Object.keys(oldArray).length >= 1 && item != undefined) {
+            const itemsIndexesFalse = oldArray.flatMap((obj, i) => obj.types.do == false ? i : []);
+            itemsIndexesFalse.map((index) =>
+                oldArray.splice(index, 1)
+            )
+        }
+    }
+
+    const checkValueArray = (value:any) => {
+        oldArray.filter(filterArray);
+        if(oldArray.find(obj => obj != undefined)){
+            console.log(oldArray.find(obj => obj == obj))
+
+            const itemsIndexes = oldArray.flatMap((obj, i) => obj.types.types === value.types.types ? i : []);
+
+            itemsIndexes.map((index) =>
+                oldArray.splice(index, 1)
+            )
+            
+        }
+    }
+    
+    const handleOnChange = (value:any) => {
+        setTypeOfTrader({...typeOfTrader, types: value })
+        getTypeTrader(value);
+        checkValueArray(value);
+        updateStepThreeState({...stepThreeState, types: value })
+    }
+    
+    useEffect(() => {
+        oldArray.filter(filterArrayFalse);
+        console.log(oldArray)
+    })
 
     return (
         <TraderRegisterContainer>
@@ -323,7 +386,9 @@ const TraderRegister = () => {
                             value={stepThreeState.description}
                             onChange={(value) => updateStepThreeState({ ...stepThreeState, description: value })}
                         />
-                        <InputCheckbox items={items} typeCheckbox="register_pro" onChange={(value) => updateStepThreeState({...stepThreeState, types: value })} />
+                        <RegisterProContainerCheckbox>
+                            <InputCheckbox items={items} typeCheckbox="register_pro" onChange={(value) => handleOnChange({...typeOfTrader, types: value})} />
+                        </RegisterProContainerCheckbox>
                     </>
                 )}
             </TraderRegisterContent>

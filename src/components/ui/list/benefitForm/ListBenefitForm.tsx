@@ -71,15 +71,17 @@ const ListBenefitForm = ({title}: ListBenefitFormProps) => {
     }
   }
 
-  useEffect(() => {
-    oldArray.filter(filterArrayFalse);
-  })
-
+  
   const handleOnChange = (value:any) => {
     setTypeOfPrestation({...typeOfPrestation, types: value })
     getTypeTrader(value);
     checkValueArray(value);
   }
+  
+  useEffect(() => {
+    oldArray.filter(filterArrayFalse);
+    console.log(oldArray)
+  })
 
   return (
     <ListBenefitFormContainer>

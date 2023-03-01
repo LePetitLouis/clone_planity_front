@@ -21,3 +21,8 @@ export const TraderRegisterContent = styled.form`
     flex-direction: column;
     margin-top: 50px;
 `;
+
+
+export const RegisterProContainerCheckbox = styled.div`
+    margin-top: 10px;
+`

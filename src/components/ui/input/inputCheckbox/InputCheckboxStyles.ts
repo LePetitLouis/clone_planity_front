@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const InputCheckboxContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: fit-content;
+  flex-wrap: wrap;
 
   input[type="checkbox"] {
     display: none;

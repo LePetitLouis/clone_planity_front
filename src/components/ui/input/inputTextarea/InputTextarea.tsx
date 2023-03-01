@@ -16,7 +16,7 @@ interface InputTextareaProps {
     onChange: (value: string) => void;
 }
 
-const InputTextarea = ({ label, colorLabel, colorInput, border, value, rounded, height = '80px', backgroundInputColor, placeholder, error, autoComplete, onChange }: InputTextareaProps) => {
+const InputTextarea = ({ label, colorLabel, colorInput, border, value, rounded, height = 'auto', backgroundInputColor, placeholder, error, autoComplete, onChange }: InputTextareaProps) => {
     const [isFocused, setIsFocused] = useState(false);
     const [borderColor, setBorderColor] = useState(border);
 
