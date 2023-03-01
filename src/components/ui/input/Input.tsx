@@ -8,13 +8,14 @@ interface InputProps {
     colorInput?: string;
     type: string;
     value: string;
+    focus?: boolean;
     placeholder?: string;
     suggestions?: string[];
     onChange: (value: string) => void;
 }
 
-const Input = ({ label, colorLabel, colorInput, type, value, placeholder, suggestions, onChange }: InputProps) => {
-    const [isFocused, setIsFocused] = useState(false);
+const Input = ({ label, colorLabel, focus, colorInput, type, value, placeholder, suggestions, onChange }: InputProps) => {
+    const [isFocused, setIsFocused] = useState(focus || false);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     const handleFocus = () => {
@@ -24,11 +25,12 @@ const Input = ({ label, colorLabel, colorInput, type, value, placeholder, sugges
 
     const handleBlur = () => {
         setIsFocused(false);
-        setShowSuggestions(false);
+        setTimeout(() => {
+            setShowSuggestions(false);
+        }, 200);
     };
 
     const handleClickSuggestion = (value: string) => {
-        console.log('click', value);
         onChange(value);
         handleBlur();
     };
@@ -38,11 +40,10 @@ const Input = ({ label, colorLabel, colorInput, type, value, placeholder, sugges
             <LabelCustom style={{ color: colorLabel }}>{label}
                 <InputCustom type={type} value={value} placeholder={placeholder} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
             </LabelCustom>
-            {/* TODO BUG: the click on the suggestion is broken because the container suggestions is show when input focus */}
             { (suggestions && showSuggestions) && <SuggestionsContainer>
                 <SuggestionsList>
                     {suggestions && suggestions.map((suggestion, index) => (
-                    <SuggestionsItem key={index} onClick={() => handleClickSuggestion(suggestion)}>{suggestion}</SuggestionsItem>
+                    <SuggestionsItem className="suggestions-item" key={index} onClick={() => handleClickSuggestion(suggestion)}>{suggestion}</SuggestionsItem>
                     ))}
                 </SuggestionsList>
             </SuggestionsContainer> }
