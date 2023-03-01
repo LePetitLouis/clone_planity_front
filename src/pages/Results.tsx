@@ -4,10 +4,22 @@ import Result from "../components/result/Result";
 
 import { IShop } from "../index.d";
 
+import { useAppSelector } from "../store/hook";
+import { selectSearch } from "../store/slice/searchSlice";
+
+import { API } from "../services";
+
 const Results = () => {
   const [shops, setShops] = useState<IShop[]>([]);
 
+  const search = useAppSelector(selectSearch);
+
   useEffect(() => {
+    const fetchCoords = async () => {
+      const data = await API.geocoding.getCoordinates(search.place);
+      return data;
+    };
+  
     const fetchShops = async () => {
       const data = [{
         id: 1,
@@ -165,8 +177,9 @@ const Results = () => {
       setShops(data);
     }
 
+    // fetchCoords();
     fetchShops();
-  }, [])
+  }, [search.place])
 
   return (
     <>
