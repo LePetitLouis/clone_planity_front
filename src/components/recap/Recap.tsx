@@ -1,19 +1,22 @@
 // components
-import { RecapContainer, RecapHeader, RecapTitle, RecapHeaderAddress, RecapStepOne, RecapStepOneTitle, RecapStepOneTime, RecapStepOnePrice, RecapStepTwo, RecapStepTwoDate, RecapStepTwoTime } from "./RecapStyles";
+import { RecapContainer, RecapHeader, RecapTitle, RecapHeaderAddress, RecapStepOne, RecapStepOneTitle, RecapStepOneTime, RecapStepOnePrice, RecapStepTwo, RecapStepTwoDate, RecapStepTwoTime, RecapStepThree, RecapStepThreeName, RecapStepThreePhone, RecapComments } from "./RecapStyles";
 import Step from "../ui/step/Step";
 import Button from "../ui/button/Button";
 import Timeslot from "../timeslot/Timeslot";
 import LoginForm from "../ui/form/login/LoginForm";
+import InputTextarea from "../ui/input/inputTextarea/InputTextarea";
+import { CgMathPlus } from "react-icons/cg";
 
 // store
 import { useAppDispatch, useAppSelector } from "../../store/hook"
-import { selectBooking, setTime, setDate } from "../../store/slice/bookingSlice";
+import { selectBooking, setTime, setDate, setComment } from "../../store/slice/bookingSlice";
 import { useNavigate } from "react-router-dom";
 import { selectAuth } from "../../store/slice/authSlice";
 import { selectSearch } from "../../store/slice/searchSlice";
 
 // utils
 import { monthNames } from "../../utils";
+import { useState } from "react";
 
 
 const Recap = () => {
@@ -23,6 +26,8 @@ const Recap = () => {
     const search = useAppSelector(selectSearch)
     const booking = useAppSelector(selectBooking)
     const auth = useAppSelector(selectAuth)
+
+    const [showComments, setShowComments] = useState(false);
 
     const handleSelectedDateTime = (year: string, month: string, date: string, time: string) => {
         const monthNumber = monthNames.indexOf(month.replace(/^[a-z]/, (m) => { return m.toUpperCase() })) + 1;
@@ -36,6 +41,14 @@ const Recap = () => {
     const handleGoToDetailsShop = () => {
         navigate(`/details-shop/${booking.shop?.id}`)
         dispatch(setDate(null))
+    }
+
+    const handleUpdateComment = (comment: string) => {
+        dispatch(setComment(comment))
+    }
+
+    const handleConfirmationBooking = () => {
+        console.log('confirmation')
     }
     
     return (
@@ -73,8 +86,27 @@ const Recap = () => {
             </Step>
 
             {booking.date && <Step number="3" title="Identification">
-                {!auth.token && <LoginForm /> } 
+                {!auth.token ? <LoginForm /> 
+                : 
+                <RecapStepThree>
+                    <RecapStepThreeName>{auth.firstName} {auth.lastName}</RecapStepThreeName>
+                    <RecapStepThreePhone>{auth.phone}</RecapStepThreePhone>
+                </RecapStepThree>
+                } 
             </Step>}
+
+            {booking.date && auth.token &&
+                <>
+                <Button color="var(--grey-700)" backgroundColor="var(--white)" rounded onClick={() => setShowComments(!showComments)}>
+                    <CgMathPlus size={15} />
+                    Informations complémentaires
+                </Button>
+                <RecapComments show={showComments}>
+                    <InputTextarea height="100%" rounded placeholder="Informations complémentaires" label="" value={booking.comment} onChange={(value) => handleUpdateComment(value)} />
+                </RecapComments>
+                <Button width="100%" color="var(--white)" backgroundColor="var(--grey-700)" rounded onClick={handleConfirmationBooking}>Confirmer</Button>
+                </>
+            }
         </RecapContainer>
     );
 };

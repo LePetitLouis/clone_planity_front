@@ -16,7 +16,7 @@ interface InputTextareaProps {
     onChange: (value: string) => void;
 }
 
-const InputTextarea = ({ label, colorLabel, colorInput, border, value, rounded, height, backgroundInputColor, placeholder, error, autoComplete, onChange }: InputTextareaProps) => {
+const InputTextarea = ({ label, colorLabel, colorInput, border, value, rounded, height = '80px', backgroundInputColor, placeholder, error, autoComplete, onChange }: InputTextareaProps) => {
     const [isFocused, setIsFocused] = useState(false);
     const [borderColor, setBorderColor] = useState(border);
 
@@ -33,9 +33,9 @@ const InputTextarea = ({ label, colorLabel, colorInput, border, value, rounded, 
     };
 
     return (
-        <InputTextContainer className={ isFocused ? 'focused' : '' }>
-            <LabelTextCustom style={{ color: colorLabel }}>{label}
-                <InputTextCustom as="textarea" value={value} placeholder={placeholder} autoComplete={autoComplete} border={borderColor} rounded={rounded} height={height} backgroundInputColor={backgroundInputColor} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
+        <InputTextContainer className={ isFocused ? 'focused' : '' } style={{ height: height }}>
+            <LabelTextCustom style={{ color: colorLabel, height: height }}>{label}
+                <InputTextCustom as="textarea" value={value} placeholder={placeholder} autoComplete={autoComplete} border={borderColor} rounded={rounded} backgroundInputColor={backgroundInputColor} height={height} onFocus={handleFocus} onBlur={handleBlur} onChange={(event) => onChange(event.target.value)} style={{ color: colorInput }} />
             </LabelTextCustom>
             { error?.length ? <InputTextError>{error}</InputTextError> : null}
         </InputTextContainer>

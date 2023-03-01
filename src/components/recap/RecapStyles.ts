@@ -100,3 +100,50 @@ export const RecapStepTwoTime = styled.span`
 `;
 
 // End of Step 2
+
+// Step 3
+export const RecapStepThree = styled.div`
+    flex: 1;
+    display: flex;
+`;
+
+export const RecapStepThreeName = styled.h1`
+    font: var(--medium) var(--body-4);
+    margin: 0;
+    padding: 0;
+`;
+
+export const RecapStepThreePhone = styled.span`
+    color: var(--grey-600);
+    font: var(--regular) var(--body-4);
+
+    &::before {
+        content: "";
+        flex-shrink: 0;
+        width: 4px;
+        height: 4px;
+        background-color: var(--grey-400);
+        border-radius: 100%;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+`;
+
+// End of Step 3
+
+type props = {
+    show: boolean;
+};
+
+// Comments
+export const RecapComments = styled.div`
+    padding: 20px 32px;
+    transition: max-height var(--timing-medium) var(--ease-out);
+    box-shadow: var(--shadow-regular);
+    background-color: var(--white);
+    border-radius: var(--border-radius-large);
+    border: 1px solid var(--grey-200);
+    margin: 6px 0 32px 0;
+    display: ${(props: props) => (props.show ? "block" : "none")};
+    height: ${(props: props) => (props.show ? "250px" : "0px")};
+`;
