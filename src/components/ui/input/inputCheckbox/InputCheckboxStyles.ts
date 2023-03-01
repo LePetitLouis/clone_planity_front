@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const InputCheckboxContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: fit-content;
 
   input[type="checkbox"] {
     display: none;

@@ -21,16 +21,16 @@ const InputCheckbox = ({items, onChange, typeCheckbox}: InputCheckBoxProps) => {
     {
       items.map((element:any, key:number) => (
         <label className="custom-checkbox-wrap" key={key}>
-          <input type="checkbox" id={element.name} 
+          <input type="checkbox" id={element.name}
             onChange={(e) => onChange(
               typeCheckbox == "register_pro" ?
                 {types: element.name, do: e.target.checked}
-              : typeCheckbox == "prestation" ? 
+              : typeCheckbox == "prestation" ?
                 {types: element.name, do: e.target.checked}
               :
                 e.target.checked
-              )}
-            />            
+            )}
+          />
           <label className="custom-checkbox" htmlFor={element.name}></label>
           <span className="label">{element.label ? element.label : element.name}</span>
         </label>
