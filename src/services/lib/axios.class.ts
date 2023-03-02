@@ -6,7 +6,7 @@ class Axios {
 
   constructor() {
     this.instance = axiosLibrary.create({
-      baseURL: 'http://localhost:8097/',
+      baseURL: process.env.REACT_APP_API_BASE_URL,
       timeout: 10000,
       headers: {
         "Content-Type": "application/json"
