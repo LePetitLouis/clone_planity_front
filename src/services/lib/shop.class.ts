@@ -3,7 +3,10 @@ import { axios } from "./axios.class";
 class Shop {
     public async getShopByCoordinates(kind: string, lat: number, lng: number) {
         try {
-            const { data } = await axios.get(`/shops/${kind}/${lat}/${lng}`);
+            const { data } = await axios.get(`/shops/nearby/${lng}/${lat}/${kind}`);
+            if (data === null) {
+                return [];
+            }
             return data;
         } catch {
             return null;

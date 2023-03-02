@@ -2,18 +2,19 @@ export interface IShop {
   id: number;
   name: string;
   description: string;
-  address: string;
+  image?: string;
+  address?: string;
   phone: string;
   email: string;
-  image: string;
-  categories: string[];
+  categories?: string[];
   openingHours?: IOpeningHours[];
   benefits?: IBenefits[];
   collaborators?: ICollaborator[];
   city: string;
   postalCode: string;
   lat: number;
-  lng: number;
+  long: number;
+  distance?: number;
 }
 
 export interface IUser {

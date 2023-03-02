@@ -37,7 +37,7 @@ Shop.args = {
         "phone": "0123456789",
         "email": "test@gmail.com",
         "image": "https://source.unsplash.com/1600x900/?salon",
-        "lng": 2.267000,
+        "long": 2.267000,
         "lat": 48.856310,
         "categories": ["Coiffure", "Esthétique"],
         "openingHours": [

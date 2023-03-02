@@ -11,7 +11,6 @@ import { AddressAutofill } from "@mapbox/search-js-react"
 
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { IBenefit, ITypeTrader } from "../../../../index.d";
-import { env } from "../../../../config/env";  
 import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 
 interface IStepOneForm {
@@ -311,7 +310,7 @@ const TraderRegister = () => {
                             onChange={(value) => updateStepTwoState({ ...stepTwoState, companyName: value })}
                             error={error.companyName}
                         />
-                        <AddressAutofill accessToken={env.REACT_APP_API_KEY_MAPBOX}>
+                        <AddressAutofill accessToken={process.env.REACT_APP_API_KEY_MAPBOX || ""}>
                             <InputText
                                 label="Adresse"
                                 placeholder="Adresse"

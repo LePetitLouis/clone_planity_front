@@ -7,6 +7,7 @@ import LoginForm from "../ui/form/login/LoginForm";
 import InputTextarea from "../ui/input/inputTextarea/InputTextarea";
 import { CgMathPlus } from "react-icons/cg";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { CiLocationOn } from "react-icons/ci";
 
 // store
 import { useAppDispatch, useAppSelector } from "../../store/hook"
@@ -18,6 +19,7 @@ import { selectSearch } from "../../store/slice/searchSlice";
 // utils
 import { monthNames } from "../../utils";
 import { useState } from "react";
+import { formatPhoneNumber } from "react-phone-number-input";
 
 
 const Recap = () => {
@@ -65,7 +67,10 @@ const Recap = () => {
         <RecapContainer>
             <RecapHeader>
                 <RecapTitle>{booking.benefit?.title}</RecapTitle>
-                <RecapHeaderAddress>{booking.shop?.address}, {booking.shop?.postalCode} {booking.shop?.city}</RecapHeaderAddress>
+                <div style={{ 'display': 'flex', 'gap': '5px', 'alignItems': 'center' }}>
+                    <CiLocationOn size={15} />
+                    <RecapHeaderAddress>{booking.shop?.address}, {booking.shop?.postalCode} {booking.shop?.city}</RecapHeaderAddress>
+                </div>
             </RecapHeader>
 
             <Step number="1" title="Prestation sélectionnée">
@@ -104,7 +109,7 @@ const Recap = () => {
                 : 
                 <RecapStepThree>
                     <RecapStepThreeName>{auth.firstName} {auth.lastName}</RecapStepThreeName>
-                    <RecapStepThreePhone>{auth.phone}</RecapStepThreePhone>
+                    <RecapStepThreePhone>{formatPhoneNumber(auth.phone)}</RecapStepThreePhone>
                 </RecapStepThree>
                 } 
             </Step>}

@@ -4,6 +4,7 @@ import Button from "../../button/Button";
 import { CiLocationOn } from "react-icons/ci";
 
 import { IShop } from "../../../../index.d";
+import { useEffect, useState } from "react";
 
 export interface ShopCardProps {
   shop: IShop
@@ -11,15 +12,21 @@ export interface ShopCardProps {
 }
 
 const ShopCard = ({ shop, onClick }: ShopCardProps) => {
+  const [shopState, setShopState] = useState<IShop>(shop);
+
+  useEffect(() => {
+    console.log(shop)
+    setShopState(shop);
+  }, [shop])
 
   return (
     <ShopCardContainer onClick={() => onClick(shop)}>
-      <ShopCardImage src={shop.image} />
+      <ShopCardImage src="https://source.unsplash.com/1600x900/?salon" />
       <ShopCardContent>
-        <ShopCardTitle>{shop.name}</ShopCardTitle>
+        <ShopCardTitle>{shopState.name}</ShopCardTitle>
         <div style={{ 'display': 'flex', 'gap': '5px', 'alignItems': 'center' }}>
           <CiLocationOn size={15} />
-          <ShopCardAddress>{shop.address}, {shop.postalCode} {shop.city}</ShopCardAddress>
+          <ShopCardAddress>{shopState.address}</ShopCardAddress>
         </div>
         <Button onClick={() => null} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Prendre RDV</Button>
       </ShopCardContent>

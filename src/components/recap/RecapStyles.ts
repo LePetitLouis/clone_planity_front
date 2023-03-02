@@ -86,6 +86,8 @@ export const RecapStepTwoDate = styled.p`
 export const RecapStepTwoTime = styled.span`
     color: var(--grey-600);
     font: var(--regular) var(--body-4);
+    display: inline-flex;
+    align-items: center;
 
     &::before {
         content: "";
@@ -116,6 +118,8 @@ export const RecapStepThreeName = styled.h1`
 export const RecapStepThreePhone = styled.span`
     color: var(--grey-600);
     font: var(--regular) var(--body-4);
+    display: inline-flex;
+    align-items: center;
 
     &::before {
         content: "";
