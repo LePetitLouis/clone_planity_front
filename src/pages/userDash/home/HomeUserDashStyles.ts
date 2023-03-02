@@ -82,3 +82,26 @@ export const HomeUserDashForm = styled.form`
     flex-direction: column;
 `;
 
+export const HomeUserDashBookingTitle = styled.h1`
+    font: var(--medium) var(--body-4);
+    margin: 0;
+    padding: 0;
+`;
+
+export const HomeUserDashBookingDescription = styled.span`
+    color: var(--grey-600);
+    font: var(--regular) var(--body-4);
+    display: inline-flex;
+    align-items: center;
+
+    &::before {
+        content: "";
+        flex-shrink: 0;
+        width: 4px;
+        height: 4px;
+        background-color: var(--grey-400);
+        border-radius: 100%;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+`;

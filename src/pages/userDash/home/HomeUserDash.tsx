@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { HomeUserDashContainer, HomeUserDashContent, HomeUserDashMenu, HomeUserDashMenuTitle, HomeUserDashMenuList, HomeUserDashMenuListItem, HomeUserDashMenuDivider, HomeUserDashInfos, HomeUserDashMenuDescription, HomeUserDashForm } from "./HomeUserDashStyles";
+import { HomeUserDashContainer, HomeUserDashContent, HomeUserDashMenu, HomeUserDashMenuTitle, HomeUserDashMenuList, HomeUserDashMenuListItem, HomeUserDashMenuDivider, HomeUserDashInfos, HomeUserDashMenuDescription, HomeUserDashForm, HomeUserDashBookingTitle, HomeUserDashBookingDescription } from "./HomeUserDashStyles";
 import InputText from "../../../components/ui/input/inputText/InputText";
 import Button from "../../../components/ui/button/Button";
 import InputPhone from "../../../components/ui/input/inputPhone/InputPhone";
@@ -23,6 +23,8 @@ const HomeUserDash = () => {
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+    const [bookings, setBookings] = useState([]);
 
     const [userInfos, setUserInfos] = useState({
         token: auth.token,
@@ -93,6 +95,16 @@ const HomeUserDash = () => {
         initInfos();
     }, [auth]);
 
+    useEffect(() => {
+        const fetchBookings = async () => {
+            const data = await API.booking.getBookingByUser();
+            if (data) setBookings(data);
+            else setBookings([]);
+        }
+
+        fetchBookings();
+    }, []);
+
     return (
         <HomeUserDashContainer>
             <HomeUserDashMenu>
@@ -154,7 +166,22 @@ const HomeUserDash = () => {
                 {tab === 'booking' && (
                     <HomeUserDashInfos>
                         <HomeUserDashMenuTitle>Mes rendez-vous à venir</HomeUserDashMenuTitle>
-                        <HomeUserDashMenuDescription>Vous n'avez pas de rendez-vous à venir.</HomeUserDashMenuDescription>
+                        {bookings.length > 0 ? (
+                            <>
+                                <HomeUserDashMenuDescription>Vous avez {bookings.length} rendez-vous à venir.</HomeUserDashMenuDescription>
+                                {bookings.map((booking: any, index) => (
+                                    <HomeUserDashInfos key={index}>
+                                        <div style={{display: 'flex'}}>
+                                            <HomeUserDashBookingTitle>{booking.shop_name}</HomeUserDashBookingTitle>
+                                            <HomeUserDashBookingDescription>{booking.benefit_name}</HomeUserDashBookingDescription>
+                                        </div>
+                                        <HomeUserDashBookingTitle>le {booking.date} à {booking.time}</HomeUserDashBookingTitle>
+                                    </HomeUserDashInfos>
+                                ))}
+                            </>
+                        ) : (
+                            <HomeUserDashMenuDescription>Vous n'avez pas de rendez-vous à venir.</HomeUserDashMenuDescription>
+                        )}
                         <Button color="var(--white)" backgroundColor="var(--grey-700)" rounded onClick={() => navigate('/')}>Prendre RDV</Button>
                     </HomeUserDashInfos>
                 )}
