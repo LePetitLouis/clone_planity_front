@@ -20,6 +20,7 @@ import { selectSearch } from "../../store/slice/searchSlice";
 import { monthNames } from "../../utils";
 import { useState } from "react";
 import { formatPhoneNumber } from "react-phone-number-input";
+import { API } from "../../services";
 
 
 const Recap = () => {
@@ -51,8 +52,17 @@ const Recap = () => {
         dispatch(setComment(comment))
     }
 
-    const handleConfirmationBooking = () => {
+    const handleConfirmationBooking = async () => {
         console.log('confirmation')
+        if (booking.benefit && booking.shop && booking.date && booking.time) {
+            const dateformated = `${booking.date.getFullYear()}-${booking.date.getMonth()}-${booking.date.getDate()}`
+            const data = await API.booking.createBooking(booking.benefit?.id, booking.shop?.id, dateformated, booking.time, booking.comment)
+            if (data) {
+                alert('Réservation confirmée')
+                navigate('/my-account')
+            }
+            else alert('Erreur lors de la réservation')
+        }
     }
 
     const nextWeek = () => {

@@ -19,9 +19,9 @@ class Booking {
     //     }
     // }
 
-    public async createBooking(booking: any) {
+    public async createBooking(id_benefit: number, id_shop: number, date: string, time: string, comment?: string) {
         try {
-            const { data } = await axios.post(`/reservation`, booking);
+            const { data } = await axios.post(`/reservation`, { id_benefit, id_shop, date, time, comment });
             return data;
         } catch {
             return null;
