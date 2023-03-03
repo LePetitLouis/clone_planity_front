@@ -12,16 +12,3 @@ export const ListBenefitContainer = styled.div`
     padding-bottom: 22px;
     margin-bottom: 22px;
 `;
-
-export const ListBenefitTitle = styled.h2`
-    font: var(--medium) var(--body-1);
-    margin: 0;
-    padding-top: 22px;
-    padding-bottom: 10px;
-`;
-
-export const ListBenefitSubTitle = styled.h3`
-    margin: 0;
-    font: var(--regular) var(--body-3);
-    color: var(--grey-600);
-`;

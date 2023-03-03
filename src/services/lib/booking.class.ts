@@ -10,6 +10,15 @@ class Booking {
         }
     }
 
+    public async GetExistingReservationForPeriod(id: number) {
+        try {
+            const { data } = await axios.get(`/reservation/${id}`);
+            return data;
+        } catch {
+            return null;
+        }
+    }
+
     // public async getBookingByShop(id: string) {
     //     try {
     //         const { data } = await axios.get(`/bookings/shop/${id}`);

@@ -16,8 +16,8 @@ export const ListOpeningHours = ({ openingHours }: ListOpeningHoursProps) => {
                     <OpeningHoursCard
                         key={index}
                         day={openingHour.day}
-                        opening={openingHour.opening}
-                        closing={openingHour.closing}
+                        opening={openingHour.open}
+                        closing={openingHour.close}
                     />
                 ))}
             </ListOpenningHoursContainer>

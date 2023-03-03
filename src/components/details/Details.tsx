@@ -33,16 +33,13 @@ const Details = ({ shop }: DetailsProps) => {
             <DetailsContent>
                 <DetailsContentMain>
                     <DetailsContentTitle>Choix de la prestation</DetailsContentTitle>
-                    {shop.benefits && shop.benefits.map((benefit, index) => (
-                        <ListBenefit key={index} title={benefit.title} description={benefit.description} benefits={benefit.benefits} />
-                    ))}
-
+                    {shop.benefits && <ListBenefit benefits={shop.benefits} />}
                     {shop.collaborators && <ListCollaborator collaborators={shop.collaborators} />}
                     {shop.description && <AboutCard about={shop.description} />}
                 </DetailsContentMain>
 
                 <DetailsContentAside>
-                    {shop.openingHours && <ListOpeningHours openingHours={shop.openingHours} />}
+                    {shop.opening && <ListOpeningHours openingHours={shop.opening} />}
                 </DetailsContentAside>
             </DetailsContent>
         </DetailsContainer>

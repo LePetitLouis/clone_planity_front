@@ -11,14 +11,14 @@ import { CiLocationOn } from "react-icons/ci";
 
 // store
 import { useAppDispatch, useAppSelector } from "../../store/hook"
-import { selectBooking, setTime, setDate, setComment } from "../../store/slice/bookingSlice";
+import { selectBooking, setTime, setDate, setComment, resetBooking } from "../../store/slice/bookingSlice";
 import { useNavigate } from "react-router-dom";
 import { selectAuth } from "../../store/slice/authSlice";
-import { selectSearch } from "../../store/slice/searchSlice";
+import { resetSearch, selectSearch } from "../../store/slice/searchSlice";
 
 // utils
 import { monthNames } from "../../utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { API } from "../../services";
 
@@ -34,13 +34,15 @@ const Recap = () => {
     const [showComments, setShowComments] = useState(false);
     const [dateStart, setDateStart] = useState<Date>(search.date ? search.date : new Date(Date.now()));
 
+    const [dateNotAvailable, setDateNotAvailable] = useState<[]>([]);
+
     const handleSelectedDateTime = (year: string, month: string, date: string, time: string) => {
         const monthNumber = monthNames.indexOf(month.replace(/^[a-z]/, (m) => { return m.toUpperCase() })) + 1;
         console.log(`${year}-${monthNumber}-${date} ${time}`);
         console.log(new Date(`${year}-${monthNumber}-${date} ${time}`))
 
         dispatch(setDate(new Date(`${year}-${monthNumber}-${date} ${time}`)))
-        booking.benefit?.time && dispatch(setTime(booking.benefit?.time))
+        dispatch(setTime(time.replace(':', 'h')))
     }
 
     const handleGoToDetailsShop = () => {
@@ -56,9 +58,12 @@ const Recap = () => {
         console.log('confirmation')
         if (booking.benefit && booking.shop && booking.date && booking.time) {
             const dateformated = `${booking.date.getFullYear()}-${booking.date.getMonth()}-${booking.date.getDate()}`
-            const data = await API.booking.createBooking(booking.benefit?.id, booking.shop?.id, dateformated, booking.time, booking.comment)
+            const data = await API.booking.createBooking(booking.benefit?.id_benefit
+                , booking.shop?.id, dateformated, booking.time, booking.comment)
             if (data) {
                 alert('Réservation confirmée')
+                dispatch(resetBooking())
+                dispatch(resetSearch())
                 navigate('/my-account')
             }
             else alert('Erreur lors de la réservation')
@@ -72,22 +77,34 @@ const Recap = () => {
     const previousWeek = () => {
         setDateStart(new Date(dateStart.getTime() - 7 * 24 * 60 * 60 * 1000))
     }
+
+    useEffect(() => {
+        const fetchExistingReservationForPeriod = async () => {
+            if (booking.shop?.id) {
+                const data = await API.booking.GetExistingReservationForPeriod(booking.shop?.id)
+                if (data) setDateNotAvailable(data)
+                else alert('Erreur lors de la récupération des réservations')
+            }
+        }
+
+        fetchExistingReservationForPeriod()
+    }, [booking.shop?.id])
     
     return (
         <RecapContainer>
             <RecapHeader>
-                <RecapTitle>{booking.benefit?.title}</RecapTitle>
+                <RecapTitle>{booking.benefit?.name}</RecapTitle>
                 <div style={{ 'display': 'flex', 'gap': '5px', 'alignItems': 'center' }}>
                     <CiLocationOn size={15} />
-                    <RecapHeaderAddress>{booking.shop?.address}, {booking.shop?.postalCode} {booking.shop?.city}</RecapHeaderAddress>
+                    <RecapHeaderAddress>{booking.shop?.address}</RecapHeaderAddress>
                 </div>
             </RecapHeader>
 
             <Step number="1" title="Prestation sélectionnée">
                 <RecapStepOne>
-                    <RecapStepOneTitle>{booking.benefit?.title}</RecapStepOneTitle>
+                    <RecapStepOneTitle>{booking.benefit?.name}</RecapStepOneTitle>
                     <div style={{ display: 'flex', alignItems: 'center'}}>
-                        <RecapStepOneTime>{booking.benefit?.time}</RecapStepOneTime>
+                        <RecapStepOneTime>{booking.benefit?.duration}</RecapStepOneTime>
                         <RecapStepOnePrice>{booking.benefit?.price}</RecapStepOnePrice>
                     </div>
                 </RecapStepOne>
@@ -97,7 +114,7 @@ const Recap = () => {
                 {!booking.date ? (
                     <>
                         <FiChevronLeft size={25} color={(dateStart.toLocaleDateString() === search.date?.toLocaleDateString() || dateStart.toLocaleDateString() === new Date().toLocaleDateString()) ? '#F7F7F7' : 'var(--grey-700)' } cursor={(dateStart.toLocaleDateString() === search.date?.toLocaleDateString() || dateStart.toLocaleDateString() === new Date().toLocaleDateString()) ? 'not-allowed' : 'pointer'} style={{ position: 'absolute', top: '30px', left: '20px'}} onClick={previousWeek} />
-                        <Timeslot dateStart={dateStart} openingHours={booking.shop?.openingHours} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />
+                        <Timeslot dateStart={dateStart} dateNotAvailable={dateNotAvailable} openingHours={booking.shop?.opening} onClick={(year, month, date, time) => handleSelectedDateTime(year, month, date, time)} />
                         <FiChevronRight size={25} cursor="pointer" style={{ position: 'absolute', top: '30px', right: '20px' }} onClick={nextWeek} />
                     </>
                     ) 

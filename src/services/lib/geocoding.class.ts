@@ -5,7 +5,7 @@ class Geocoding {
     public async getCoordinates(address: string) {
         try {
             const { data } = await axios.get(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${process.env.REACT_APP_API_KEY_MAPBOX}`
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=pk.eyJ1IjoicGV0aXRsb3VpcyIsImEiOiJjbDNlOTAyMmUwZmRvM2ZsNXJtcjV4OTBkIn0.X9rxSrW6cEvzHSpYBT6VHA`
             );
             return data.features[0].center;
         } catch {
@@ -16,7 +16,7 @@ class Geocoding {
     public async getAddress(lat: number, lng: number): Promise<string> {
         try {
             const { data } = await axios.get(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_API_KEY_MAPBOX}`
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=pk.eyJ1IjoicGV0aXRsb3VpcyIsImEiOiJjbDNlOTAyMmUwZmRvM2ZsNXJtcjV4OTBkIn0.X9rxSrW6cEvzHSpYBT6VHA`
             );
             return data.features[0].place_name;
         } catch {

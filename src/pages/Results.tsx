@@ -19,14 +19,7 @@ const Results = () => {
       const data = await API.geocoding.getCoordinates(search.place);
 
       const shops = await API.shop.getShopByCoordinates(search.category, data[1], data[0]);
-      if (shops.length) {
-        shops.map(async (shop: IShop) => {
-          shop.address = await API.geocoding.getAddress(shop.lat, shop.long);
-          return shop;
-        });
-        console.log(shops);
-        setShops(shops);
-      }
+      if (shops.length) setShops(shops);
       else setShops([]);
     };
 

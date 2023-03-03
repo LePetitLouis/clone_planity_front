@@ -7,7 +7,7 @@ export interface IShop {
   phone: string;
   email: string;
   categories?: string[];
-  openingHours?: IOpeningHours[];
+  opening?: IOpeningHours[];
   benefits?: IBenefits[];
   collaborators?: ICollaborator[];
   city: string;
@@ -27,23 +27,17 @@ export interface IUser {
 }
 
 export interface IBenefits {
-  title: string;
+  id_benefit: number;
+  name: string;
   description?: string;
-  benefits: IBenefit[];
-}
-
-export interface IBenefit {
-  id: number;
-  title: string;
-  description?: string;
-  time?: string;
+  duration?: string;
   price?: string;
 }
 
 export interface IOpeningHours {
   day: number;
-  opening: string;
-  closing: string;
+  open: string;
+  close: string;
 }
 
 export interface ICollaborator {

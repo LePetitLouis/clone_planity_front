@@ -13,9 +13,9 @@ class Shop {
         }
     }
 
-    public async getDetailsShop(id: string) {
+    public async getDetailsShop(id: number) {
         try {
-            const { data } = await axios.get(`/shops/details/${id}`);
+            const { data } = await axios.get(`/shop/${id}`);
             return data;
         } catch {
             return null;

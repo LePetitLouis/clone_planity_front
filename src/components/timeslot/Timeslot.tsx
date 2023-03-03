@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 interface TimeSlotProps {
     dateStart: Date
+    dateNotAvailable: []
     openingHours?: IOpeningHours[]
     onClick: (year: string, month: string, date: string, time: string) => void
 }
@@ -18,12 +19,12 @@ interface IDaySlot {
     timeslot?: string[]
 }
 
-export const Timeslot = ({ dateStart, openingHours, onClick }: TimeSlotProps) => {
+export const Timeslot = ({ dateStart, dateNotAvailable, openingHours, onClick }: TimeSlotProps) => {
     const [daySlotsFormatted, setDaySlotsFormatted] = useState<IDaySlot[]>([]);
 
     const convertTime = (time: string) => {
-        const hours = Number(time.split(':')[0]);
-        const minutes = Number(time.split(':')[1]);
+        const hours = Number(time.split('h')[0]);
+        const minutes = Number(time.split('h')[1]);
 
         return hours * 60 + minutes;
     }
@@ -47,13 +48,15 @@ export const Timeslot = ({ dateStart, openingHours, onClick }: TimeSlotProps) =>
             const month = date.toLocaleDateString('fr-FR', { month: 'long' });
             const year = date.toLocaleDateString('fr-FR', { year: 'numeric' });
 
-            const openningHoursOfDay = openingHours?.filter((openingHour: IOpeningHours) => openingHour.day === days.indexOf(day));
+            const openningHoursOfDay = openingHours?.filter((openingHour: IOpeningHours) => Number(openingHour.day) === days.indexOf(day));
             const timeslot: string[] = [];
+
+            console.log(openningHoursOfDay)
 
             if (openningHoursOfDay) {
                 const timeSlotDay = [];
-                const start = convertTime(openningHoursOfDay[0].opening);
-                const end = convertTime(openningHoursOfDay[0].closing);
+                const start = convertTime(openningHoursOfDay[0].open);
+                const end = convertTime(openningHoursOfDay[0].close);
                 const duration = 30;
 
                 for (let i = start; i < end; i += duration) {
@@ -67,7 +70,11 @@ export const Timeslot = ({ dateStart, openingHours, onClick }: TimeSlotProps) =>
                     hours = hours.length === 1 ? hours = `0${hours}` : hours;
                     minutes = minutes === '0' ? minutes = '00' : minutes;
 
-                    timeslot.push(`${hours}:${minutes}`);
+                    const dateFormated = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                    dateNotAvailable.forEach((date: any) => {
+                        if (date.date === dateFormated && date.time === `${hours}h${minutes}`) return 
+                        else timeslot.push(`${hours}:${minutes}`)
+                    });
                 });
             }
 
@@ -81,7 +88,7 @@ export const Timeslot = ({ dateStart, openingHours, onClick }: TimeSlotProps) =>
         }
 
         setDaySlotsFormatted(daySlots);
-    }, [dateStart, openingHours]);
+    }, [dateStart, openingHours, dateNotAvailable]);
 
     return (
         <TimeSlotContainer>

@@ -19,8 +19,8 @@ export const ListOpeningHoursForm = ({ openingHours }: ListOpeningHoursFormProps
                     <OpeningHoursCardInput
                         key={index}
                         day={openingHour.day}
-                        opening={openingHour.opening}
-                        closing={openingHour.closing}
+                        opening={openingHour.open}
+                        closing={openingHour.close}
                     />
                 ))}
             </ListOpenningHoursContainer>

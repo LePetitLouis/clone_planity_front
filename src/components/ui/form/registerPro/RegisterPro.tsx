@@ -10,7 +10,7 @@ import Stepline from "../../stepline/Stepline";
 import { AddressAutofill } from "@mapbox/search-js-react"
 
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { IBenefit, ITypeTrader } from "../../../../index.d";
+import { IBenefits, ITypeTrader } from "../../../../index.d";
 import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 
 interface IStepOneForm {
@@ -30,7 +30,7 @@ interface IStepTwoForm {
 }
 
 interface IStepThreeForm {
-    benefits: IBenefit[];
+    benefits: IBenefits[];
     categories: string[];
     description: string;
     types: ITypeTrader[];
