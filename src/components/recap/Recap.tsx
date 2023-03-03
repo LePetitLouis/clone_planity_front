@@ -57,7 +57,7 @@ const Recap = () => {
     const handleConfirmationBooking = async () => {
         console.log('confirmation')
         if (booking.benefit && booking.shop && booking.date && booking.time) {
-            const dateformated = `${booking.date.getFullYear()}-${booking.date.getMonth()}-${booking.date.getDate()}`
+            const dateformated = `${booking.date.getFullYear()}-${booking.date.getMonth() + 1}-${booking.date.getDate()}`
             const data = await API.booking.createBooking(booking.benefit?.id_benefit
                 , booking.shop?.id, dateformated, booking.time, booking.comment)
             if (data) {

@@ -72,10 +72,12 @@ export const Timeslot = ({ dateStart, dateNotAvailable, openingHours, onClick }:
 
                     const dateFormated = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
                     
-                    dateNotAvailable.length ? dateNotAvailable.forEach((date: any) => {
+                    console.log(dateNotAvailable.length)
+                    if (dateNotAvailable.length) dateNotAvailable.forEach((date: any) => {
                         if (date.date === dateFormated && date.time === `${hours}h${minutes}`) return 
                         else timeslot.push(`${hours}:${minutes}`)
-                    }) : timeslot.push(`${hours}:${minutes}`)
+                    })
+                    else timeslot.push(`${hours}:${minutes}`)
                 });
             }
 
