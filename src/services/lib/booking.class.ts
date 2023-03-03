@@ -4,7 +4,6 @@ class Booking {
     public async getBookingByUser() {
         try {
             const { data } = await axios.get(`/reservation`);
-            if (data === null) return [];
             return data;
         } catch {
             return null;
@@ -14,6 +13,7 @@ class Booking {
     public async GetExistingReservationForPeriod(id: number) {
         try {
             const { data } = await axios.get(`/reservation/${id}`);
+            if (data === null) return [];
             return data;
         } catch {
             return false;
