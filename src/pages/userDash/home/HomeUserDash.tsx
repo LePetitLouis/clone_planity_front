@@ -80,6 +80,16 @@ const HomeUserDash = () => {
         navigate('/');
     }
 
+    const handleCancelBooking = async (id: number) => {
+        const data = await API.booking.deleteBooking(id);
+        if (data) {
+            const newBookings = bookings.filter((booking: any) => booking.id !== id);
+            setBookings(newBookings);
+        } else {
+            alert('Erreur lors de l\'annulation du rendez-vous');
+        }
+    }
+
     useEffect(() => {
         const initInfos = () => {
             setUserInfos({
@@ -171,11 +181,16 @@ const HomeUserDash = () => {
                                 <HomeUserDashMenuDescription>Vous avez {bookings.length} rendez-vous à venir.</HomeUserDashMenuDescription>
                                 {bookings.map((booking: any, index) => (
                                     <HomeUserDashInfos key={index}>
-                                        <div style={{display: 'flex'}}>
-                                            <HomeUserDashBookingTitle>{booking.shop_name}</HomeUserDashBookingTitle>
-                                            <HomeUserDashBookingDescription>{booking.benefit_name}</HomeUserDashBookingDescription>
+                                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                                <div style={{display: 'flex'}}>
+                                                    <HomeUserDashBookingTitle>{booking.shop_name}</HomeUserDashBookingTitle>
+                                                    <HomeUserDashBookingDescription>{booking.benefit_name}</HomeUserDashBookingDescription>
+                                                </div>
+                                                <HomeUserDashBookingTitle>le {booking.date} à {booking.time}</HomeUserDashBookingTitle>
+                                            </div>
+                                            <Button color="var(--primary-200)" backgroundColor="var(--white)" rounded onClick={() => handleCancelBooking(booking.id_reservation)}>Annuler</Button>
                                         </div>
-                                        <HomeUserDashBookingTitle>le {booking.date} à {booking.time}</HomeUserDashBookingTitle>
                                     </HomeUserDashInfos>
                                 ))}
                             </>

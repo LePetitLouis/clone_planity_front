@@ -46,14 +46,14 @@ class Booking {
     //     }
     // }
 
-    // public async deleteBooking(id: string) {
-    //     try {
-    //         const { data } = await axios.delete(`/bookings/${id}`);
-    //         return data;
-    //     } catch {
-    //         return null;
-    //     }
-    // }
+    public async deleteBooking(id: number) {
+        try {
+            const { data } = await axios.delete(`/reservation/${id}`);
+            return data;
+        } catch {
+            return null;
+        }
+    }
 }
 
 export const booking = new Booking();
