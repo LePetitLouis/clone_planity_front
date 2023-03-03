@@ -25,4 +25,9 @@ export const TraderRegisterContent = styled.form`
 
 export const RegisterProContainerCheckbox = styled.div`
     margin-top: 10px;
+    margin-bottom: 20px;
+`
+
+export const RegisterProContainerCheckboxItem = styled.div`
+    margin-bottom: 20px;
 `

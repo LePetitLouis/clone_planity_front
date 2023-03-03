@@ -8,7 +8,7 @@ interface InputCheckBoxProps {
 }
 
 interface Items {
-  name?: string
+  name?: any
   label?: string
 }
 

@@ -54,3 +54,7 @@ export interface ITypeTrader {
   types: string;
   do: boolean
 }
+
+export interface ITypeShopeTrade {
+  type: any;
+}
