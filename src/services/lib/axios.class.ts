@@ -6,7 +6,7 @@ class Axios {
 
   constructor() {
     this.instance = axiosLibrary.create({
-      baseURL: 'http://localhost:8097/',
+      baseURL: 'http://139.59.208.93:8097/',
       timeout: 10000,
       headers: {
         "Content-Type": "application/json"
