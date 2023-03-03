@@ -44,7 +44,7 @@ export const RegisterForm = () => {
     if (lastName === "") setError(prevState => ({ ...prevState, lastName: "Merci de saisir un nom" }));
 
     if (firstName !== "" && lastName !== "") {
-      const data = await API.auth.register(firstName, lastName, phone, email, password, 'role')
+      const data = await API.auth.register(firstName, lastName, phone, email, password, 'user')
       if (data) {
         dispatch(login(data));
         navigate('/my-account', { replace: true });
