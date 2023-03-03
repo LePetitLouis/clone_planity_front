@@ -10,9 +10,7 @@ import Stepline from "../../stepline/Stepline";
 import { AddressAutofill } from "@mapbox/search-js-react"
 
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { ITypeTrader } from "../../../../index.d";
-import { ITypeShopeTrade } from "../../../../index.d";
-import { env } from "../../../../config/env";  
+import { ITypeShopeTrade } from "../../../../index.d";  
 import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 import { API } from "../../../../services/index";
 import { useAppDispatch } from "../../../../store/hook";
