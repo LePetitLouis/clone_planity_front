@@ -9,7 +9,7 @@ const HomeTrader = () => {
   const navigate = useNavigate();
 
   const redirectShopDetails = (id:number) => {
-    navigate("/deatils-shop/"+id)
+    navigate("/details-shop/"+id)
   }
 
   const [shopID, setShopID] = useState<[]>([])
