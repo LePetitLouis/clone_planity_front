@@ -14,6 +14,18 @@ class Shop {
         }
     }
 
+    public async getShopByUser(){
+        try{
+            const {data} = await axios.get(`/get-shop-by-user`);
+            if(data === null){
+                return [];
+            }
+            return data
+        } catch {
+            return null
+        }
+    }
+
     public async getDetailsShop(id: number) {
         try {
             const { data } = await axios.get(`/shop/${id}`);

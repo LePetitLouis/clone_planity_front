@@ -15,6 +15,7 @@ import InputCheckbox from "../../input/inputCheckbox/InputCheckbox";
 import { API } from "../../../../services/index";
 import { useAppDispatch } from "../../../../store/hook";
 import { login } from "../../../../store/slice/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface IStepOneForm {
     firstName: string;
@@ -66,6 +67,7 @@ const items = [
 
 const TraderRegister = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const allEqual = (object:any) => {
         Object.keys(object).forEach(function(key, index) {
@@ -128,6 +130,9 @@ const TraderRegister = () => {
         oldArray.map((item, i) => (
             setNewArray(newArray => [...newArray, oldArray[i].id_kind.types])
         ))
+    }
+
+    const handleSetAllValue = () => {
         updateStepThreeState({...stepThreeState, id_kind: newArray })
     }
 
@@ -167,19 +172,21 @@ const TraderRegister = () => {
         if (stepThreeState.description === "") setError(prevState => ({ ...prevState, description: "Merci de saisir une description" }))
         if (stepThreeState.id_kind.length === 0) setError(prevState => ({ ...prevState, id_kind: "Merci de saisir au moins un type de commerce" }))
 
-        if (stepOneState.firstName !== "" && stepOneState.lastName !== "" && stepOneState.phone !== "" && stepOneState.email !== "" && isValidPhoneNumber(stepOneState.phone) && regexEmail.test(stepOneState.email) && stepTwoState.name !== "" && stepTwoState.address !== "" && stepTwoState.zip_code !== "" && stepTwoState.city !== "" && stepTwoState.country !== "" && stepThreeState.id_kind.length !== 0 && stepThreeState.description !== "") {
+        if (stepOneState.firstName !== "" && stepOneState.lastName !== "" && stepOneState.phone !== "" && stepOneState.email !== "" && isValidPhoneNumber(stepOneState.phone) && regexEmail.test(stepOneState.email) && stepTwoState.name !== "" && stepTwoState.address !== "" && stepTwoState.zip_code !== "" && stepTwoState.city !== "" && stepTwoState.country !== "" && (stepThreeState.id_kind.length !== 0 || stepThreeState.id_kind === newArray) && stepThreeState.description !== "") {
             const data = await API.shop.registerShop(stepOneState.firstName, stepOneState.lastName, stepOneState.phone, stepOneState.email, stepOneState.password, stepTwoState.name, stepTwoState.address, stepTwoState.zip_code, stepTwoState.city, stepTwoState.country, stepThreeState.description, stepThreeState.id_kind)
             console.log(data);
-            // const dataLogin = [stepOneState.firstName, stepOneState.lastName, stepOneState.phone, stepOneState.email, stepOneState.password, "trader"]
-            // if (dataLogin) {
-            //   dispatch(login(dataLogin))
-            // } else {
-            //   alert('Erreur lors de l\'inscription');
-            // }
+            if (data) {
+              dispatch(login(data))
+              navigate("/dashboard-trader")
+            } else {
+              alert('Erreur lors de l\'inscription');
+            }
         }
     }
 
     const handleNextStep = () => {
+
+        const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
         setError({
             firstName: "",
@@ -197,7 +204,6 @@ const TraderRegister = () => {
         });
 
         if (currentStep === 1) {
-            const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
             // Check if all fields are filled
             if (stepOneState.firstName !== "" && stepOneState.lastName !== "" && stepOneState.phone !== "" && stepOneState.email !== "" && isValidPhoneNumber(stepOneState.phone) && regexEmail.test(stepOneState.email)) {
@@ -232,12 +238,14 @@ const TraderRegister = () => {
                 allEqual(stepTwoState)
                 allEqual(stepThreeState)
             }
+            if (stepOneState.firstName !== "" && stepOneState.lastName !== "" && stepOneState.phone !== "" && stepOneState.email !== "" && isValidPhoneNumber(stepOneState.phone) && regexEmail.test(stepOneState.email) && stepTwoState.name !== "" && stepTwoState.address !== "" && stepTwoState.zip_code !== "" && stepTwoState.city !== "" && stepTwoState.country !== "" && stepThreeState.id_kind.length !== 0 && stepThreeState.description !== "") {
+                setCurrentStep(4);
+            }
 
             // Error handling
             if (stepThreeState.description === "") setError(prevState => ({ ...prevState, description: "Merci de saisir une description" }))
             if (stepThreeState.id_kind.length === 0) setError(prevState => ({ ...prevState, id_kind: "Merci de saisir au moins un type de commerce" }))
         }
-
     }
 
     const getTypeTrader = (value:any) => {
@@ -286,14 +294,10 @@ const TraderRegister = () => {
         console.log(stepThreeState);
     })
 
-    // console.log(stepOneState);
-    // console.log(stepTwoState);
-    // console.log(stepThreeState);
-
     return (
         <TraderRegisterContainer>
             <TraderRegisterTitle>Créer un compte professionnel</TraderRegisterTitle>
-            <Stepline steps={["1", "2", "3"]} activeStep={currentStep} onClick={(step) => setCurrentStep(step)} />
+            <Stepline steps={["1", "2", "3", "4"]} activeStep={currentStep} onClick={(step) => setCurrentStep(step)} />
 
             <TraderRegisterContent onSubmit={e => e.preventDefault()}>
                 {currentStep === 1 && (
@@ -470,6 +474,20 @@ const TraderRegister = () => {
                                 Vérifier le type
                             </Button>
                         </RegisterProContainerCheckbox>
+                        <Button 
+                            color="var(--white)" 
+                            backgroundColor="var(--grey-900)" 
+                            borderColor="var(--white)" 
+                            height="48px" 
+                            rounded 
+                            onClick={() => (handleSetAllValue(), handleNextStep())}
+                        >
+                            Vérifier les toutes vos données
+                        </Button>
+                    </>
+                )}
+                {currentStep === 4 && (
+                    <>
                         <Button 
                             color="var(--white)" 
                             backgroundColor="var(--grey-900)" 

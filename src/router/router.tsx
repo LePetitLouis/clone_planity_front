@@ -21,6 +21,7 @@ import TraderRegister from "../pages/authentification/TraderRegister";
 import HomeDash from "../pages/traderDash/HomeDash";
 import CalendarDash from "../pages/traderDash/CalendarDash";
 import HomeUserDash from "../pages/userDash/home/HomeUserDash";
+import HomeTrader from "../pages/HomeTrader";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "details-shop/:id",
                 element: <DetailsShop />,
+            },
+            {
+                path: "home-trader",
+                element: <HomeTrader />,
             },
             {
                 path: "booking",

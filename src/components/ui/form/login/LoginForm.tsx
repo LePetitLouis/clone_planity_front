@@ -40,7 +40,12 @@ const LoginForm = () => {
             const data = await API.auth.login(email, password);
             if (data) {
                 dispatch(login(data));
-                navigate('/my-account', { replace: true });
+                if(data.role ==='user'){
+                    navigate('/my-account', { replace: true })
+                } else{
+                    
+                    navigate('/home-trader', { replace: true })
+                }
             } else {
                 setErrorLogin("L'adresse email ou le mot de passe est incorrect");
             }
