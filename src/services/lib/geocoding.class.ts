@@ -1,27 +1,27 @@
 import axios from "axios";
-import { env } from "../../config/env";
 
 class Geocoding {
     
     public async getCoordinates(address: string) {
         try {
             const { data } = await axios.get(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=${env.REACT_APP_API_KEY_MAPBOX}`
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=pk.eyJ1IjoicGV0aXRsb3VpcyIsImEiOiJjbDNlOTAyMmUwZmRvM2ZsNXJtcjV4OTBkIn0.X9rxSrW6cEvzHSpYBT6VHA`
             );
             return data.features[0].center;
         } catch {
             return null;
         }
-        
-        // const response = await axios.get(
-        //     `https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?proximity=ip&access_token=${env.REACT_APP_API_KEY_MAPBOX}`
-        // );
-        // const data = response.data;
-        // if (!data || data.status === "ZERO_RESULTS") {
-        // throw new Error("Could not find location for the specified address.");
-        // }
-        // const coordinates = data.results[0].geometry.location;
-        // return coordinates;
+    }
+
+    public async getAddress(lat: number, lng: number): Promise<string> {
+        try {
+            const { data } = await axios.get(
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=pk.eyJ1IjoicGV0aXRsb3VpcyIsImEiOiJjbDNlOTAyMmUwZmRvM2ZsNXJtcjV4OTBkIn0.X9rxSrW6cEvzHSpYBT6VHA`
+            );
+            return data.features[0].place_name;
+        } catch {
+            return "";
+        }
     }
 }
 

@@ -2,18 +2,19 @@ export interface IShop {
   id: number;
   name: string;
   description: string;
-  address: string;
+  image?: string;
+  address?: string;
   phone: string;
   email: string;
-  image: string;
-  categories: string[];
-  openingHours?: IOpeningHours[];
+  categories?: string[];
+  opening?: IOpeningHours[];
   benefits?: IBenefits[];
   collaborators?: ICollaborator[];
   city: string;
   postalCode: string;
   lat: number;
-  lng: number;
+  long: number;
+  distance?: number;
 }
 
 export interface IUser {
@@ -26,23 +27,17 @@ export interface IUser {
 }
 
 export interface IBenefits {
-  title: string;
+  id_benefit: number;
+  name: string;
   description?: string;
-  benefits: IBenefit[];
-}
-
-export interface IBenefit {
-  id: number;
-  title: string;
-  description?: string;
-  time?: string;
+  duration?: string;
   price?: string;
 }
 
 export interface IOpeningHours {
   day: number;
-  opening: string;
-  closing: string;
+  open: string;
+  close: string;
 }
 
 export interface ICollaborator {

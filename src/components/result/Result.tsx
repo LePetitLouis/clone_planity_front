@@ -3,9 +3,7 @@ import { ResultContainer, ResultContent, ResultMap } from "./ResultStyles";
 import ListShop from "../ui/list/shop/ListShop";
 import Map, { Marker } from 'react-map-gl';
 
-import { IShop } from "../../index.d";
-
-import { env } from "../../config/env";  
+import { IShop } from "../../index.d"; 
 
 interface ResultProps {
   shops: IShop[];
@@ -15,25 +13,24 @@ const Result = ({ shops }: ResultProps) => {
   return (
     <ResultContainer>
       <ResultContent>
-        <ListShop shops={shops} />
+        {shops.length ? <ListShop shops={shops} /> : <p>Aucun salon à proximité</p>}
       </ResultContent>
 
       <ResultMap>
-        {/* <Map
+        <Map
           initialViewState={{
             longitude: 2.333333,
             latitude: 48.866667,
             zoom: 6,
           }}
-          mapboxAccessToken={env.REACT_APP_API_KEY_MAPBOX}
+          mapboxAccessToken={process.env.REACT_APP_API_KEY_MAPBOX}
           style={{width: '100%', height: '100%'}}
           mapStyle="mapbox://styles/mapbox/streets-v9"
         >
-          <Marker longitude={2.567560} latitude={48.950570} anchor="bottom"></Marker>
-          {shops.map((shop) => (
-            <Marker longitude={shop.lng} latitude={shop.lat} anchor="bottom" />
+          {shops.map((shop, index) => (
+            <Marker key={index} longitude={shop.long} latitude={shop.lat} anchor="bottom" />
           ))}
-        </Map> */}
+        </Map>
       </ResultMap>
     </ResultContainer>
   );

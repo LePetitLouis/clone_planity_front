@@ -17,7 +17,7 @@ const OpeningHoursCard = ({ day, opening, closing }: OpeningHoursCardProps) => {
         "Samedi"
     ]
 
-    const isToday = new Date().getDay() === day;
+    const isToday = new Date().getDay() === Number(day);
 
     return (
         <OpeningHoursCardContainer>

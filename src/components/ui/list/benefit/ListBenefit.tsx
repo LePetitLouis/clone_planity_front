@@ -1,31 +1,26 @@
-import { ListBenefitContainer, ListBenefitTitle, ListBenefitSubTitle } from "./ListBenefitStyles";
+import { ListBenefitContainer } from "./ListBenefitStyles";
 import BenefitCard from "../../card/benefit/BenefitCard";
 
-import { IBenefit } from "../../../../index.d";
+import { IBenefits } from "../../../../index.d";
 import { useAppDispatch } from "../../../../store/hook";
 import { setBenefit } from "../../../../store/slice/bookingSlice";
 import { useNavigate } from "react-router-dom";
 
 interface ListBenefitProps {
-    title: string
-    description?: string
-    benefits: IBenefit[]
+    benefits: IBenefits[]
 }
 
-const ListBenefit = ({ title, description, benefits }: ListBenefitProps) => {
+const ListBenefit = ({ benefits }: ListBenefitProps) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     
-    const handleSelectedBenefit = (benefit: IBenefit) => {
+    const handleSelectedBenefit = (benefit: IBenefits) => {
         dispatch(setBenefit(benefit))
         navigate('/booking', { replace: true })
     }
 
     return (
         <>
-            <ListBenefitTitle>{title}
-            {description && <ListBenefitSubTitle>{description}</ListBenefitSubTitle>}
-            </ListBenefitTitle>
             <ListBenefitContainer>
                 {benefits.map((benefit, index) => (
                     <BenefitCard

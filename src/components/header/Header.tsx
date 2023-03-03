@@ -37,7 +37,7 @@ const Header = () => {
                     </List>
                 </Nav>
                 <ButtonsContainer>
-                    <Button onClick={() => navigate('/pro/register')} color="var(--grey-600)" backgroundColor="var(--grey-200)" rounded>Ajouter un établissement</Button>
+                    {auth.role !== 'user' && <Button onClick={() => navigate('/pro/register')} color="var(--grey-600)" backgroundColor="var(--grey-200)" rounded>Ajouter un établissement</Button>}
                     {auth.token ? 
                         <Button onClick={() => navigate("/my-account")} color="var(--white)" backgroundColor="var(--grey-700)" rounded>{auth.firstName}</Button> :
                         <Button onClick={() => navigate("/login")} color="var(--white)" backgroundColor="var(--grey-700)" rounded>Se connecter</Button>

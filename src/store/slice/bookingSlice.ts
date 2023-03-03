@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-import { IShop, IBenefit } from '../../index.d';
+import { IShop, IBenefits } from '../../index.d';
 
 type BookingState = {
     shop: IShop|null;
-    benefit: IBenefit|null;
+    benefit: IBenefits|null;
     date: Date|null;
     time: string;
     comment: string;
@@ -26,7 +26,7 @@ export const bookingSlice = createSlice({
         setShop: (state, action: PayloadAction<IShop>) => {
             state.shop = action.payload;
         },
-        setBenefit: (state, action: PayloadAction<IBenefit>) => {
+        setBenefit: (state, action: PayloadAction<IBenefits>) => {
             state.benefit = action.payload;
         },
         setDate: (state, action: PayloadAction<Date|null>) => {

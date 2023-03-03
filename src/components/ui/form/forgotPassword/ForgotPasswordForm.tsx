@@ -36,7 +36,7 @@ export const ForgotPasswordForm = () => {
                 <Button color="var(--white)" backgroundColor="var(--grey-900)" height="48px" rounded onClick={handleForgotPassword} >Réinitialiser mon mot de passe</Button>
                 <ForgotPasswordFormLink href="/login">Retour à la connexion</ForgotPasswordFormLink>
                 <ForgotPasswordFormSeparator>ou</ForgotPasswordFormSeparator>
-                <ForgotPasswordFormTitle>Nouveau sur Planity ?</ForgotPasswordFormTitle>
+                <ForgotPasswordFormTitle>Nouveau sur Agendly ?</ForgotPasswordFormTitle>
                 <Button color="var(--grey-900)" backgroundColor="var(--white)" borderColor="var(--grey-900)" height="48px" rounded onClick={() => navigate('register', { replace: true })}>Créer un compte</Button>
             </ForgotPasswordFormContent>
         </ForgotPasswordFormContainer>

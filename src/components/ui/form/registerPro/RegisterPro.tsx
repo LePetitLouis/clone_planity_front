@@ -382,7 +382,7 @@ const TraderRegister = () => {
                             onChange={(value) => updateStepTwoState({ ...stepTwoState, name: value })}
                             error={error.name}
                         />
-                        <AddressAutofill accessToken={env.REACT_APP_API_KEY_MAPBOX}>
+                        <AddressAutofill accessToken={process.env.REACT_APP_API_KEY_MAPBOX || ""}>
                             <InputText
                                 label="Adresse"
                                 placeholder="Adresse"

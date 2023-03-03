@@ -49,7 +49,7 @@ const LoginForm = () => {
 
     return (
         <LoginFormContainer>
-            <LoginFormTitle>Vous avez déjà utilisé Planity ?</LoginFormTitle>
+            <LoginFormTitle>Vous avez déjà utilisé Agendly ?</LoginFormTitle>
             {errorLogin && <LoginFormError>{errorLogin}</LoginFormError>}
             <LoginFormContent onSubmit={e => e.preventDefault()}>
                 <InputText label="Email *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="email" value={email} placeholder="Email" error={error.email} onChange={(value) => setEmail(value)} />
@@ -57,7 +57,7 @@ const LoginForm = () => {
                 <LoginFormLink href="/forgot-password">Mot de passe oublié ?</LoginFormLink>
                 <Button color="var(--white)" backgroundColor="var(--grey-900)" height="48px" rounded onClick={handleLogin}>Se connecter</Button>
                 <LoginFormSeparator>ou</LoginFormSeparator>
-                <LoginFormTitle>Nouveau sur Planity ?</LoginFormTitle>
+                <LoginFormTitle>Nouveau sur Agendly ?</LoginFormTitle>
                 <Button color="var(--grey-900)" backgroundColor="var(--white)" borderColor="var(--grey-900)" height="48px" rounded onClick={() => navigate('/register', { replace: true })}>Créer un compte</Button>
             </LoginFormContent>
         </LoginFormContainer>

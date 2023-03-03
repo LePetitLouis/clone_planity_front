@@ -3,3 +3,4 @@ export { axios } from "./axios.class";
 export { user } from "./user.class";
 export { geocoding } from "./geocoding.class";
 export { shop } from "./shop.class";
+export { booking } from "./booking.class";

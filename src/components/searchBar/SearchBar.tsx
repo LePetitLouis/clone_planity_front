@@ -8,8 +8,6 @@ import { AddressAutofill } from "@mapbox/search-js-react"
 import { useAppSelector, useAppDispatch } from "../../store/hook"
 import { selectSearch, setCategory, setPlace } from "../../store/slice/searchSlice"
 
-import { env } from "../../config/env";
-
 const SearchBar = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -33,7 +31,7 @@ const SearchBar = () => {
             <Input label="Que cherchez-vous ?" type="text" value={search.category} placeholder="Nom du salon, prestation (coupe...)" suggestions={suggestions} onChange={(value) => dispatch(setCategory(value))} />
             <SearchBarSeparator />
             <div style={{ width: '100%'}}>
-            <AddressAutofill accessToken={env.REACT_APP_API_KEY_MAPBOX} popoverOptions={{ offset: 35 }}>
+            <AddressAutofill accessToken={process.env.REACT_APP_API_KEY_MAPBOX || ""} popoverOptions={{ offset: 35 }}>
                 <Input label="Où" type="text" value={search.place} placeholder="Adresse, ville..." onChange={(value) => dispatch(setPlace(value))} />
             </AddressAutofill>
             </div>
