@@ -75,7 +75,7 @@ const TraderRegister = () => {
         });
     }
     
-    const [currentStep, setCurrentStep] = useState(3);
+    const [currentStep, setCurrentStep] = useState(1);
 
     const initialStepOneForm: IStepOneForm = {
         firstName: "",
