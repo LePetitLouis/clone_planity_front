@@ -84,14 +84,14 @@ export const RegisterForm = () => {
     <RegisterFormContainer>
       {currentStep === 1 && (
         <>
-          <RegisterFormTitle>Nouveau sur Planity ?</RegisterFormTitle>
+          <RegisterFormTitle>Nouveau sur Agendly ?</RegisterFormTitle>
           <RegisterFormContent onSubmit={e => e.preventDefault()}>
             <InputPhone placeholder="Téléphone portable" label="Téléphone portable *" defaultCountry="FR" value={phone} error={error.phone} onChange={(value) => setPhone(value)} />
             <InputText label="Email *" border="var(--grey-500)" rounded backgroundInputColor="var(--white)" colorLabel="var(--grey-900)" type="email" value={email} placeholder="Email" error={error.email} onChange={(value) => setEmail(value)} />
             <InputText label="Mot de passe *" border="var(--grey-500)" backgroundInputColor="var(--white)" rounded colorLabel="var(--grey-900)" type="password" value={password} placeholder="Mot de passe" error={error.password} onChange={(value) => setPassword(value)} />
             <Button color="var(--white)" backgroundColor="var(--grey-900)" height="48px" rounded onClick={handleNextStep}>Créer un compte</Button>
             <RegisterFormSeparator>ou</RegisterFormSeparator>
-            <RegisterFormTitle>Vous avez déjà utilisé Planity ?</RegisterFormTitle>
+            <RegisterFormTitle>Vous avez déjà utilisé Agendly ?</RegisterFormTitle>
             <Button color="var(--grey-900)" backgroundColor="var(--white)" borderColor="var(--grey-900)" height="48px" rounded onClick={() => navigate('/login', { replace: true })}>Se connecter</Button>
           </RegisterFormContent>
         </>
