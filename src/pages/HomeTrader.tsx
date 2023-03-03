@@ -40,7 +40,7 @@ const HomeTrader = () => {
                 rounded 
                 onClick={() => redirectShopDetails(item.id)}
                 >
-                Créer
+                Voir plus
             </Button>
           </HomeTraderContainerCard>
         ))}
